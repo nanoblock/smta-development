@@ -1,47 +1,170 @@
+@media screen and (min-width: 321px) and (max-width: 767px) { }   /*(min-width: 321px) and (max-width: 480px)*/
+@media screen and (min-width: 767px) and (max-width: 1024px) { 
+  .landing {
+    height: 100%;
+    .landing-simulation {
+      left: 0; 
+      right: 0; 
+      margin-left: auto; 
+      margin-right: auto; 
+      width: 239px;
+      height: 487.8px;
+      margin-top: 50px;
+      .upload {
+        width: 207.7px;
+        height: 369.1px;
+        margin-top: 59.7px;
+        left: 0; 
+        right: 0; 
+        margin-left: auto; 
+        margin-right: auto;
+        .logo {
+          width: 121.2px;
+          height: 102.4px;
+          margin-top: 73.8px;
+          margin-left: 43.3px;
+        }
+
+        .text-area {
+          width: 158.3px;
+          height: 81px;
+          margin-left: 24.7px;
+          margin-top: 20.2px;
+          font-size: 16px;
+          font-weight: 300;
+          letter-spacing: 0.3px;
+          text-align: center;
+          .sub-text {
+            margin-top: 5px;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+          }
+        }
+      }
+    } /*landing-simulation*/
+    .center-elements {
+      height: 577px;
+      margin-top: 327px;
+      .text-area {
+        width: 413px;
+        height: 196.5px;
+        margin-top: 235px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        /*font-family: AppleSDGothicNeo;*/
+        font-size: 52px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-align: center;
+        .sub-text {
+          font-size: 25px;
+          font-weight: 300;
+          letter-spacing: 0.5px;
+        }
+      }
+      .image-area {
+        text-align: center;
+        width: 412px;
+        margin-top: 446px;
+        left: 0;
+        right: 0;
+        margin-left: auto;
+        margin-right: auto;
+        height: 50px;
+      }
+    } /*center-elements*/
+  } /*landing*/
+}  /*(min-width: 801px) and (max-width: 1024px)*/
+@media screen and (min-width: 1024px) and (max-width: 1439px) { 
+  
+} /*(min-width: 1281px) and (max-width: 1440px)*/
+@media screen and (min-width: 1440px) and (max-width: 1600px) {
+  .landing {
+    top:0;left:0;right:0;bottom:0;
+    margin: auto;
+    .landing-simulation {
+      width: 320px;
+      height: 653.7px;
+      margin-left: 309px;
+      margin-top: 126.5px;
+      .upload {
+        width: 278.1px;
+        height: 494.6px;
+        margin-top: 80px;
+        margin-left: 20.9px;
+        .logo {
+          margin-top: 112.6px;
+          margin-left: 57.9px;
+        }
+        .text-area {
+          width: 212px;
+          height: 91px;
+          margin-left: 33px;
+          margin-top: 16.2px;
+          font-size: 20px;
+          font-weight: 300;
+          letter-spacing: 0.5px;
+          .sub-text {
+            margin-top: 5px;
+            font-size: 30px;
+            font-weight: 600;
+            letter-spacing: 0.6px;
+          }
+        }
+      }
+    } /*landing-simulation*/
+    .center-elements {
+      height: 408px;
+      margin-top: 249px;
+      .text-area {
+        width: 410px;
+        height: 196.5px;
+        margin-top: 74px;
+        margin-left: 745px;
+        margin-right: 282px;
+        /*font-family: AppleSDGothicNeo;*/
+        font-size: 53px;
+        font-weight: 600;
+        letter-spacing: 1px;
+        .sub-text {
+          font-size: 25px;
+          font-weight: 300;
+          letter-spacing: 0.5px;
+        }
+      }
+      .image-area {
+        margin-top: 285px;
+        margin-right: 284px;
+        height: 50px;
+      }
+    } /*center-elements*/
+  } /*landing*/
+} /*(min-width: 1441px) and (max-width: 1600px)*/
+
+@media screen and (min-width: 1601px) {}
 
 .landing {
+  /*margin: auto;*/
   position: fixed;
   overflow-y: scroll;
   width: 100%;
-  height: 100vh;
+  /*height: 100%;*/
 
   .landing-simulation {
-    position: fixed;
-    width: 320px;
-    height: 653.7px;
-    margin-left: 309px;
-    margin-top: 126.5px;
+    position: absolute;
     background-repeat: no-repeat;
     background-size: contain;
     z-index: 1;
     .upload {
-      width: 278.1px;
-      height: 494.6px;
-      margin-top: 80px;
-      margin-left: 20.9px;
       background-color: #FFAC48;
-      .logo {
-        margin-top: 112.6px;
-        margin-left: 57.9px;
-      }
       .text-area {
         position: relative;
-        width: 212px;
-        height: 91px;
-        margin-left: 33px;
-        margin-top: 16.2px;
         font-family: AppleSDGothicNeo;
-        font-size: 20px;
-        font-weight: 300;
-        letter-spacing: 0.5px;
         text-align: center;
         color: #ffffff;
-        .sub-text {
-          margin-top: 5px;
-          font-size: 30px;
-          font-weight: 600;
-          letter-spacing: 0.6px;
-        }
       }
     }
   }
@@ -50,36 +173,24 @@
 .landing .center-elements {
   position: relative;
   width: 100%;
-  height: 408px;
-  margin-top: 249px;
   background-color: #407abd;
   .text-area {
-    position: fixed;
-    max-width: 410px;
-    height: 196.5px;
-    margin-top: 74px;
-    margin-left: 745px;
-    margin-right: 282px;
-    /*font-family: AppleSDGothicNeo;*/
-    font-size: 53px;
-    font-weight: 600;
-    letter-spacing: 1px;
+    position: absolute;
+    right: 0;
     color: #ffffff;
     padding-left: 0px;
-    .sub-text {
-      font-size: 25px;
-      font-weight: 300;
-      letter-spacing: 0.5px;
-    }
   }
 
   .image-area {
-    position: relative;
-    float: right;
-    clear: both;
+    position: absolute;
+    right: 0;
     width: auto;
-    height: 50px;
-    margin-top: 285px;
-    margin-right: 284px;
   }
+}
+
+.horizontal-center {
+  left: 0; 
+  right: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
 }
