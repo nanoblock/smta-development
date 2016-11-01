@@ -1,3 +1,4 @@
+@import "bootstrap";
 @media screen and (min-width: 321px) and (max-width: 767px) { }   /*(min-width: 321px) and (max-width: 480px)*/
 @media screen and (min-width: 767px) and (max-width: 1024px) { 
   .landing {
@@ -68,7 +69,8 @@
       .image-area {
         text-align: center;
         width: 412px;
-        margin-top: 446px;
+        top: 446px;
+        margin-top: 14.5px;
         left: 0;
         right: 0;
         margin-left: auto;
@@ -78,10 +80,11 @@
     } /*center-elements*/
   } /*landing*/
 }  /*(min-width: 801px) and (max-width: 1024px)*/
-@media screen and (min-width: 1024px) and (max-width: 1439px) { 
-  
+@media screen and (min-width: 1024px) and (max-width: 1440px) { 
+   
 } /*(min-width: 1281px) and (max-width: 1440px)*/
-@media screen and (min-width: 1440px) and (max-width: 1600px) {
+
+@media screen and (min-width: 1440px) { 
   .landing {
     top:0;left:0;right:0;bottom:0;
     margin: auto;
@@ -115,7 +118,7 @@
           }
         }
       }
-    } /*landing-simulation*/
+    }
     .center-elements {
       height: 408px;
       margin-top: 249px;
@@ -136,15 +139,16 @@
         }
       }
       .image-area {
-        margin-top: 285px;
+        top: 285px;
+        margin-top: 14.5px;
         margin-right: 284px;
         height: 50px;
       }
-    } /*center-elements*/
+    }
   } /*landing*/
 } /*(min-width: 1441px) and (max-width: 1600px)*/
 
-@media screen and (min-width: 1601px) {}
+/*@media screen and (min-width: 1601px) {} */
 
 .landing {
   /*margin: auto;*/
@@ -160,6 +164,7 @@
     z-index: 1;
     .upload {
       background-color: #FFAC48;
+      /*background-color: #f5851f;*/
       .text-area {
         position: relative;
         font-family: AppleSDGothicNeo;
