@@ -1,7 +1,8 @@
 @import "bootstrap";
 
-footer {
-  width: 100%;
+.footer {
+  position: fixed;
+  bottom: 0px;
   height: 40px;
   background-color: #407abd;
   .text {
