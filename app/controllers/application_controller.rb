@@ -13,8 +13,9 @@ class ApplicationController < ActionController::Base
 
   private
   def set_browser_type
-    return request.variant = :phone if browser.device.mobile?
+    # return request.variant = :desktop
     return request.variant = :tablet if browser.device.tablet?
+    return request.variant = :phone if browser.device.mobile?
     return request.variant = :desktop if !browser.device.mobile? && !browser.device.tablet?
   end
 end

@@ -1,10 +1,16 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">H O M E</a>
-  <a href="#">U P L O A D</a>
-  <a href="#">P R O F I L E</a>
-  <a href="#">L O G  O U T</a>
+  <a href="#">HOME</a>
+  <a href="#">UPLOAD</a>
+  <a onclick="closeNav()">PROFILE</a>
+
+  <% if user_signed_in? %>
+    <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, onclick: 'closeNav()' %>
+  <% else %>
+    <%= link_to "LOGIN", '', class: "userModal", id: 'login', onclick: 'closeNav()' %>
+  <% end %>
 </div>
+
 <header class="container">
   <div class="navbar navbar-fixed-top navbar-default">
     <%= link_to image_tag('/assets/header/logo.svg', class: 'logo vertical-center', size: '106x38'), root_path %>
@@ -12,10 +18,15 @@
   </div>
 </header>
 
-
 <script type="text/javascript">
+
   function openNav() {
-    $("#mySidenav").css('width', '470px');
+    if ('<%= @browser %>' == 'phone') {
+      $("#mySidenav").css('width', '100%');  
+    } else {
+      $("#mySidenav").css('width', '470px');
+    }
+    
   }
 
   function closeNav() {
