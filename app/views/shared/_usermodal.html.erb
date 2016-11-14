@@ -209,15 +209,15 @@
     });
 
     $('.submit-login-btn').on('click', function(event) {
-      if(!RegexEmail.test($.trim($('modal-login .login-email').val()))) {
-        $('.modal-login .email-form-error').text('이메일을 정확히 입력해 주세요.').css('visibility', 'visible');
-        $('.modal-login .pw-form-error').css('visibility', 'hidden');
-        // $(".modal-login .pw-form-error").effect( 'highlight', {color: 'rgba(245, 133, 31, 0.3)'}, 500, null );
-        $('.modal-login .login-email-img').attr('src', '/assets/landing/usermodal/email_error.svg');
-        $('.modal-login .login-pw-img').attr('src', '/assets/landing/usermodal/password.svg');
-        $('.modal-login .login-email').val('').focus();
-        return false
-      }
+      // if(!RegexEmail.test($.trim($('modal-login .login-email').val()))) {
+      //   $('.modal-login .email-form-error').text('이메일을 정확히 입력해 주세요.').css('visibility', 'visible');
+      //   $('.modal-login .pw-form-error').css('visibility', 'hidden');
+      //   // $(".modal-login .pw-form-error").effect( 'highlight', {color: 'rgba(245, 133, 31, 0.3)'}, 500, null );
+      //   $('.modal-login .login-email-img').attr('src', '/assets/landing/usermodal/email_error.svg');
+      //   $('.modal-login .login-pw-img').attr('src', '/assets/landing/usermodal/password.svg');
+      //   $('.modal-login .login-email').val('').focus();
+      //   return false
+      // }
 
       if(!RegexPw.test($.trim($('.modal-login .login-pw').val()))) {
         $('.modal-login .email-form-error').css('visibility', 'hidden');
