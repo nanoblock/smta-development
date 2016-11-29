@@ -1,0 +1,52 @@
+<%= simple_form_for @profile, url: create_profile_path, method: :post do |f| %>
+  <div class="user-icon">
+    <%= image_tag asset_path(@profile.avatar.url), class: 'icon' %>
+    <div class="overlay"></div>
+    <%= image_tag asset_path('profile/logo_overlay.svg'), class: 'overlay-icon' %>  
+  </div>
+
+  <div class="edit">
+    <div class="edit-name">
+      <div class="edit-name-text">어플이름</div>
+      <div class="edit-name-form"><%= f.input :app_name, label: false, autofocus: true %></div>
+    </div>
+    
+    <div class="edit-tel">
+      <div class="edit-tel-text">전화번호</div>
+      <div class="edit-tel-form">
+        <%= image_tag asset_path('profile/input_tel_icon.svg'), class: 'tel-form-img' %>
+        <%= f.input :tel, label: false %>
+      </div>
+    </div>
+
+    <div class="edit-email">
+      <div class="edit-email-text">이메일</div>
+      <div class="edit-email-form">
+        <%= image_tag asset_path('profile/input_email_icon.svg'), class: 'email-form-img' %>
+        <%= f.input :app_email, label: false %>
+      </div>
+    </div>
+    <div class="edit-desc">
+      <div class="edit-desc-text">어플 내용</div>
+      <div class="edit-desc-form">
+        <%= f.input :desc, label: false %>
+      </div>
+    </div>
+  </div>
+
+  <div class="action-icon">
+    <div class="cancel">
+      취소
+    </div>
+    <div class="submit">
+      확인
+    </div>
+  </div>
+<% end %>
+
+<script type="text/javascript">
+  $("input").each(function(index, value) {
+    $(value).attr('value',"");
+  })
+  $("textarea").val("");
+</script>

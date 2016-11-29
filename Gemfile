@@ -31,3 +31,6 @@ gem 'simple_form'
 
 # parser
 gem 'nokogiri'
+
+#pagenate
+gem 'kaminari'

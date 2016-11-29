@@ -1,7 +1,177 @@
 <div class="profile">
   <div class="container">
-    
-    
 
+    <div class="profile-container"> 
+      <% unless @profile.nil? %>
+        <div class="info">
+        <!--  -->
+          <%= image_tag asset_path(@profile.avatar.url), class: 'user-icon' %>
+          <div class="user-profile">
+            <div class="text">
+                <%= @profile.app_name %>
+            </div>
+            <div class="action-icon">
+              <%= link_to image_tag(asset_path('profile/call.svg'), class: 'icon'), "tel:"+@profile.tel %>
+              <%= image_tag asset_path('profile/mail.svg'), class: 'icon' %>
+              <%= image_tag asset_path('profile/edit.svg'), class: 'icon', id: 'edit' %>
+            </div>
+            <div class="sub-text">
+              <%= @profile.desc %>
+            </div>
+          </div>
+        </div>
+
+        <div class="edit-info">
+          <%= render 'profile/form' %>
+        </div>
+      <% end %>
+
+      <div class="content content-one">
+        <%= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %>
+        <div class="content-container">
+          <div class="title">Line</div>
+          <div class="desc">전 세계적인 열풍을 불러온 포켓몬 고가 출시된 지 두 달이 지났는데요. 포켓몬 고의 고향 일본에서 집 보내줘. 전 세계적인 열풍을 불러온 포켓몬 고가 출시된 지 두 달이 지났는데요. 포켓몬 고의 고향 일본에서 집 보내줘.  </div>
+          <%= image_tag asset_path('landing/iphone-6-white.png') %>
+          <% if @browser.to_s != 'phone'%>
+            <%= image_tag asset_path('landing/iphone-6-white.png'), style: 'margin-left:5px;' %>
+          <% end %>
+        </div>
+        
+      </div>
+
+      <div class="content content-two">
+        
+      </div>
+      <div class="content content-three">
+        
+      </div>
+      <div class="content content-four">
+        
+      </div>
+    </div>
+    
+    <div class="pagination">
+      <%= image_tag asset_path('profile/pagination_prev.svg'), class: 'pagination-prev' %>
+      <div class="pagination-num">1</div>
+      <div class="pagination-num">2</div>
+      <div class="pagination-num">3</div>
+      <div class="pagination-num">4</div>
+      <div class="pagination-num">5</div>
+      <%= image_tag asset_path('profile/pagination_next.svg'), class: 'pagination-next', style: 'margin-top: 15px;' %>
+    </div>
   </div>
 </div>
+
+<script>
+  $('.content').css('top',$('.info').height()+20+"px");
+
+  var device_width = $(document).width();
+
+  if (device_width <= 767 ) {
+    $('.content-container img').each(function(index, value) {
+      if(index == 1) {
+        $(value).css('display', 'none');
+      }
+    });
+  } else {
+    $('.content-container img').each(function(index, value) {
+      if(index == 1) {
+        $(value).css('display', 'inline-block');
+      }
+    });
+  }
+
+  $(window).resize(function(e) {
+    device_width = $(this).width();
+    if (device_width <= 767) {
+      $('.content-container img').each(function(index, value) {
+        if(index == 1) {
+          $(value).css('display', 'none');
+        }
+      });
+    } else {
+      $('.content-container img').each(function(index, value) {
+        if(index == 1) {
+          $(value).css('display', 'inline-block');
+        }
+      });
+    }
+  });
+
+  $('.action-icon #edit').on('click', function(e) {
+    showEditInfo();
+  });
+
+  $('.action-icon .cancel').on('click', function(e) {
+    showInfo();
+  });
+
+  $('.action-icon .submit').on('click', function(e) {
+    param_app_name = $('.edit-name-form input').val();
+    param_desc = $('.edit-desc-form textarea').val();
+    param_tel = $('.edit-tel-form input').val();
+    param_app_email = $('.edit-email-form input').val();
+
+    $.ajax({
+      type: "PUT",
+      url: "<%= profile_path %>",
+      data: { profile: { 
+        app_name: param_app_name, 
+        desc: param_desc, 
+        tel: param_tel, 
+        app_email: param_app_email}
+      },
+      success: function(data) {
+        if($('.edit-info').css('display') != 'none') {
+          showInfo(param_app_name, param_tel, param_app_email, param_desc);
+        }
+      },
+      error: function(data) {
+
+      }
+    });
+  });
+
+  $('.pagination-num').on('click', function(e) {
+    clicked = $(this);
+    $('.pagination-num').each(function(index, value) {
+      $(value).css('background-color', '#D8D8D8');
+    });
+    clicked.css('background-color', '#ffac48');
+  });
+
+  function showInfo(app_name, tel, app_email, desc) {
+    if (device_width > 1200) {
+      $('.content-one').css('margin-top', '100px');
+      $('.content-four').css('transform', 'translateY(-73%)');
+    } else if(device_width >= 787 ) {
+      $('.content-one').css('margin-top', '100px');
+    } else if(device_width >= 320) {
+      $('.content').css('top',$('.info').height()+20+"px");
+    }
+
+    if(!isNullOrUndefined(app_name) && !isNullOrUndefined(tel) && !isNullOrUndefined(app_email) && !isNullOrUndefined(desc)) {
+      $('.user-profile .text').text(app_name);
+      $('.action-icon a').attr('href', "tel:"+tel)
+      $('.user-profile .sub-text').text(desc);
+    }
+
+    $('.edit-info').fadeOut(300).css('display', 'none');
+    $('.info').fadeIn(300).css('display', 'block');
+  }
+
+  function showEditInfo() {
+    if (device_width > 1200) {
+      $('.content-one').css('margin-top', '197px');
+      $('.content-four').css('transform', 'translateY(-47%)');
+    } else if(device_width >= 787 ) {
+      $('.content-one').css('margin-top', '186px');
+    } else if(device_width >= 320) {
+      $('.content').css('top', '360px');
+    }
+    $('.info').fadeOut(300).css('display', 'none');
+    $('.edit-info').fadeIn(300).css('display', 'block');
+  }
+
+  function isNullOrUndefined(variable) { return variable === null || variable === undefined; }
+</script>

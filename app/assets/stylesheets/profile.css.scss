@@ -1,2 +1,920 @@
 @import "bootstrap";
 
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .profile {
+    width: 64%;
+    margin-left: auto;
+    margin-right: auto;
+    .container {
+      margin-top: 21px;
+      .profile-container {
+        margin-right: 108px;
+        .info {
+          width: 227px;
+          margin-left: -55px;
+          left: 50%;
+          transform: translateX(-20%);
+          .user-icon {
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            margin-left: -15px;
+          }
+          .user-profile {
+            position: absolute;
+            margin-left: -15px;
+            .text {
+              min-width: 150px;
+              font-size: 17px;
+              margin-left: 55px;
+              clear: both;
+            }
+
+            .action-icon {
+              display: block;
+              margin-top: 25px;
+              margin-left: auto;
+              left: -7px;
+              position: absolute;
+            }
+            .sub-text {
+              position: relative;
+              display: block;
+              min-width: 208px;
+              width: 100%;
+              /*width: 82%;*/
+              /*height: 70px;*/
+              margin-top: 56px;
+            }
+          }
+        }
+        .edit-info {
+          width: 227px;
+          margin-left: -55px;
+          left: 50%;
+          transform: translateX(-28%);
+          
+          .user-icon {
+            /*margin-left: -55px;*/
+            .icon {
+              width: 45px;
+              height: 45px;
+            }
+            .overlay {
+              width: 45px;
+              height: 45px;
+              opacity: .5;
+            }
+            .overlay-icon {
+              width: 24px;
+              height: 24px;
+              margin-left: 10px;
+              margin-top: 10px;
+            }
+          }
+          .edit {
+            position: absolute;
+            margin-left: 55px;
+            .edit-tel {
+              position: absolute;
+              margin-left: -55px;
+              margin-top:11px;
+            }
+            .edit-email {
+              position: absolute;
+              left: -55px;
+              top: 96px;
+              margin-top: 7px;
+            }
+            .edit-name-form {
+              input {
+                width: 172px;
+                height: 28px;
+                font-size: 14px;
+              }
+            }
+            .edit-desc {
+              clear: both;
+              position: absolute;
+              /*margin-left: 55px;*/
+              top: 15px;
+              margin-top: 138px;
+              margin-left: -55px;
+            }
+            .edit-desc-form textarea {
+              width: 227px;
+              height: 130px;
+              padding-left: 8px;
+              padding-right: 8px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+            }
+            .edit-tel-form, .edit-email-form {
+              position: absolute;
+              input {
+                width: 227px;
+                height: 28px;
+                font-size: 14px;
+              }
+              img {
+                width: 25px;
+                height: 28px;
+                margin-top: 1px;
+              }
+            }
+          }
+          .action-icon {
+            margin-left: 119px;
+            margin-top: 305px;
+            width: 108px;
+            height: 24.5px;
+            .cancel {
+              width: 50px;
+              line-height: 25px;
+              &:hover {
+                cursor:pointer; 
+              }
+            }
+            .submit {
+              width: 50px;
+              margin-left: 8px;
+              line-height: 25px;
+              color: #ffffff;
+            }
+          }
+        }
+
+        .content {
+          clear: both;
+          position: relative;
+          /*top: 170px;*/
+          /*top: 182px;*/
+          /*top: 370px;*/
+          width: 227px;
+          height: 490px;
+          margin-bottom: 24px;
+          left: 50%;
+          transform: translateX(-28%);
+          .content-container {
+            width: 90%;
+            .title {
+              padding-top: 12px;
+              font-size: 21px;
+            }
+            .desc{
+              position: absolute;
+              margin-top: 331px;
+              width: 90%;
+              font-size: 12px;
+              line-height: 1.4;
+              letter-spacing: 0.2px;
+            }
+            img {
+              margin-top: 12px;
+              width: 100%;
+              /*height: 270px;*/
+              height: 307px;
+            }
+          }
+          .edit-icon {
+            margin-top: 12px;
+            margin-right: 19px;
+          }
+        }
+
+        .content-one {
+          margin-top:0px;
+        }
+        .content-two {
+          margin-left:0px;
+        }
+        .content-three {
+          margin-top:0px; margin-left: 0px;
+        }
+        .content-four {
+          transform: translateY(0%);
+          transform: translateX(-25%);
+          margin-bottom: 70px;
+          margin-left: -6px;
+        }
+      }
+      .pagination {
+        right: 3%;
+        img {
+          width: 25px;
+          height: 25px;
+        }
+        .pagination-num {
+          width: 25px;
+          height: 25px;
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}   /*(min-width: 321px) and (max-width: 480px)*/
+@media screen and (min-width: 768px) and (max-width: 1199px) { 
+  .profile {
+    width: 486px;
+    margin-left: auto;
+    margin-right: auto;
+    .container {
+      margin-top: 31px;
+      margin-right: auto;
+      .profile-container {
+        margin-left: auto; margin-right: auto;
+        .user-icon {
+          width: 80px;
+          height: 80px;
+        }
+        .user-profile {
+          margin-left: 20px;
+          .text {
+            width: 60%;
+            height: 25px;
+            font-size: 21px;
+          }
+          .action-icon {
+            display: inline-block;
+            float: right;
+          }
+          .sub-text {
+            margin-top: 12px;
+            width: 339px;
+          }
+        }
+
+        .edit-info {
+          .user-icon {
+            .icon {
+              width: 80px;
+              height: 80px;
+            }
+            .overlay {
+              width: 80px;
+              height: 80px;
+              opacity: .5;
+            }
+            .overlay-icon {
+              width: 36px;
+              height: 36px;
+              margin-left: 22px;
+              margin-top: 22px;
+            }
+          }
+          .edit {
+            position: relative;
+            margin-left: 22px;
+            .edit-name {
+
+            }
+            .edit-tel {
+              /*margin-left: 100px;*/
+            }
+            .edit-email {
+              margin-left: 17px;
+            }
+            .edit-name-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+            }
+
+            .edit-tel-form, .edit-email-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+              img {
+                margin-top: 1px;
+                width: 23px;
+                height: 23px;
+              }
+            }
+            .edit-desc {
+              position: absolute;
+              margin-top: 52px;
+              margin-left: -102px;
+              .edit-desc-form textarea{
+                padding-left: 5px;
+                padding-top: 8px;
+                padding-right: 16px;
+                width: 442px;
+                height: 67px;  
+              }
+            }
+            
+          }
+          .action-icon {
+            clear: both;
+            left: 351px;
+            width: 88px;
+            height: 24.5px;
+            .cancel {
+              width: 40px;
+              line-height: 25px;
+              &:hover {
+                cursor:pointer; 
+              }
+            }
+            .submit {
+              width: 40px;
+              margin-left: 8px;
+              line-height: 25px;
+              color: #ffffff;
+            }
+          }
+        }
+
+      }
+      .content {
+        width: 440px;
+        height: 372px;
+        .content-container {
+          width: 64.5%;
+          .title {
+            padding-top: 19px;
+            font-size: 21px;
+          }
+          .desc {
+            font-size: 10px;
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+          }
+          img {
+            margin-top: 9px;
+            padding-bottom: 24px;
+            width: 138px;
+            height: 254px;
+          }
+        }
+        .edit-icon {
+          margin-top: 11px;
+          margin-right: 11px;
+        }
+      }
+      .content-one {
+        margin-top:100px;
+      }
+      .content-two {
+        margin-top: 24px;
+        margin-left:0px;
+      }
+      .content-three {
+        margin-top:24px; margin-left: 0px;
+      }
+      .content-four {
+        transform: translateY(0%);
+        margin-top: 24px;
+        margin-bottom: 70px;
+      }
+      .pagination {
+        margin-left: 67px;
+        img {
+          width: 33px;
+          height: 32px;
+        }
+        .pagination-num {
+          width: 33px;
+          height: 32px;
+          font-size: 22px;
+        }
+      }
+    } /*container*/
+  }
+}
+@media screen and (min-width: 1200px) { 
+  .profile {
+    margin-left: 156px;
+    .container {
+      margin-top: 40.5px;
+      .profile-container {
+        margin-right: 98px;
+        .user-icon {
+          width: 80px;
+          height: 80px;
+        }
+        .user-profile {
+          margin-left: 20px;
+          .text {
+            width: 60%;
+            height: 25px;
+            font-size: 21px;
+          }
+          .action-icon {
+            display: inline-block;
+            float: right;
+          }
+          .sub-text {
+            margin-top: 12px;
+            width: 339px;
+          }
+        }
+
+        .edit-info {
+          .user-icon {
+            .icon {
+              width: 80px;
+              height: 80px;
+            }
+            .overlay {
+              width: 80px;
+              height: 80px;
+              opacity: .5;
+            }
+            .overlay-icon {
+              width: 36px;
+              height: 36px;
+              margin-left: 22px;
+              margin-top: 22px;
+            }
+          }
+          .edit {
+            position: relative;
+            margin-left: 22px;
+            .edit-name {
+
+            }
+            .edit-tel {
+              /*margin-left: -100px;*/
+            }
+            .edit-email {
+              margin-left: 17px;
+            }
+            .edit-name-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+            }
+            .edit-tel-form, .edit-email-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+              img {
+                margin-top: 1px;
+                width: 23px;
+                height: 23px;
+              }
+            }
+            .edit-desc {
+              position: absolute;
+              top: 15px;
+              margin-top: 83px;
+              margin-left: -102px;
+              width: 442px;
+              height: 67px;
+            }
+            .edit-desc-form textarea {
+              width: 100%;
+              height: 67px;
+              padding-left: 8px;
+              padding-right: 16px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+            }
+          }
+          .action-icon {
+            clear: both;
+            left: 351px;
+            width: 88px;
+            height: 24.5px;
+            .cancel {
+              width: 40px;
+              line-height: 25px;
+              &:hover {
+                cursor:pointer; 
+              }
+            }
+            .submit {
+              width: 40px;
+              margin-left: 8px;
+              line-height: 25px;
+              color: #ffffff;
+            }
+          }
+        }
+
+        .content {
+          width: 440px;
+          height: 372px;
+          .content-container {
+            width: 64.5%;
+            .title {
+              padding-top: 19px;
+              font-size: 21px;
+            }
+            .desc {
+              font-size: 10px;
+              line-height: 1.4;
+              letter-spacing: 0.2px;
+            }
+            img {
+              margin-top: 9px;
+              padding-bottom: 24px;
+              width: 138px;
+              height: 254px;
+            }
+          }
+          .edit-icon {
+            margin-top: 11px;
+            margin-right: 11px;
+          }
+        }
+        .content-one {
+          margin-top:100px;
+        }
+        .content-two {
+          margin-left:22px;
+        }
+        .content-three {
+          margin-top:24px; margin-left: 22px;
+        }
+        .content-four {
+          transform: translateY(-73%);
+        }
+      }
+      .pagination {
+        margin-left: 67px;
+        img {
+          width: 33px;
+          height: 32px;
+        }
+        .pagination-num {
+          width: 33px;
+          height: 32px;
+          font-size: 22px;
+        }
+      }
+    }
+  }
+} /*(min-width: 1281px) and (max-width: 1440px)*/
+@media screen and (min-width: 1440px) { 
+  .profile {
+    margin-left: 220px;
+    margin-right: 220px;
+    .container {
+      margin-top: 40.5px;
+      .profile-container {
+        margin-right: 98px;
+        .user-icon {
+          width: 80px;
+          height: 80px;
+        }
+        .user-profile {
+          margin-left: 20px;
+          .action-icon {
+            display: inline-block;
+            float: right;
+          }
+          .sub-text {
+            margin-top: 12px;
+            width: 339px;
+          }
+        }
+
+        .edit-info {
+          .user-icon {
+            .icon {
+              width: 80px;
+              height: 80px;
+            }
+            .overlay {
+              width: 80px;
+              height: 80px;
+              opacity: .5;
+            }
+            .overlay-icon {
+              width: 36px;
+              height: 36px;
+              margin-left: 22px;
+              margin-top: 22px;
+            }
+          }
+          .edit {
+            position: relative;
+            margin-left: 22px;
+            .edit-name {
+
+            }
+            .edit-tel {
+              /*margin-left: -100px;*/
+            }
+            .edit-email {
+              margin-left: 17px;
+            }
+            .edit-name-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+            }
+
+            .edit-tel-form, .edit-email-form {
+              input {
+                width: 160px;
+                height: 23px;
+              }
+              img {
+                margin-top: 1px;
+                width: 23px;
+                height: 23px;
+              }
+            }
+            .edit-desc {
+              position: absolute;
+              top: 15px;
+            }
+            .edit-desc-form textarea{
+              width: 442px;
+              height: 67px;
+              padding-left: 8px;
+              padding-right: 16px;
+              padding-top: 5px;
+              padding-bottom: 5px;
+            }
+          }
+          .action-icon {
+            clear: both;
+            left: 351px;
+            width: 88px;
+            height: 24.5px;
+            .cancel {
+              width: 40px;
+              line-height: 25px;
+              &:hover {
+                cursor:pointer; 
+              }
+            }
+            .submit {
+              width: 40px;
+              margin-left: 8px;
+              line-height: 25px;
+              color: #ffffff;
+            }
+          }
+        }
+
+        .content {
+          width: 440px;
+          height: 372px;
+          .content-container {
+            width: 64.5%;
+            .title {
+              padding-top: 19px;
+              font-size: 21px;
+            }
+            .desc {
+              font-size: 10px;
+              line-height: 1.4;
+              letter-spacing: 0.2px;
+            }
+            img {
+              margin-top: 9px;
+              width: 138px;
+              height: 254px;
+              padding-bottom: 24px;
+            }
+          }
+          .edit-icon {
+            margin-top: 11px;
+            margin-right: 11px;
+          }
+        }
+
+        .content-one {
+          margin-top:100px;
+        }
+        .content-two {
+          margin-left:22px;
+        }
+        .content-three {
+          margin-top:24px;
+          margin-left: 22px;
+        }
+        .content-four {
+          transform: translateY(-73%);
+        }
+      }
+      .pagination {
+        margin-left: 67px;
+        img {
+          width: 33px;
+          height: 32px;
+        }
+        .pagination-num {
+          width: 33px;
+          height: 32px;
+          font-size: 22px;
+        }
+      }
+    }
+
+  }
+}
+
+.profile {
+  margin-bottom: 140px;
+  .container {
+    width: 100%;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 100%;
+    .profile-container {
+      .info {
+        position: absolute;
+        .user-icon {
+          float: left;
+        }
+        .user-profile {
+          position: relative;
+          float: left;
+          .text {
+            display: inline-block;
+            letter-spacing: 0.4px;
+            color: #000000;
+          }
+          .action-icon {
+            .icon {
+              width: 19px;
+              height: 19px;
+              margin-left: 6px;
+            }
+          }
+          .sub-text {
+            display: block;
+            font-size: 11px;
+            line-height: 1.3;
+            letter-spacing: 0.2px;
+            color: #000000;
+          }
+        }
+      }  /*info*/
+
+      .edit-info {
+        display: none;
+        position: absolute;
+        .user-icon {
+          float: left;
+          .icon {
+            position: absolute;
+          }
+          .overlay {
+            position: absolute;
+            background-color: black;
+            opacity: .5;
+          }
+          .overlay-icon {
+            position: absolute;
+          }
+          &:hover {
+            cursor: pointer;
+          }
+        }
+        .edit {
+          float: left;
+          font-size: 10px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 0.2px;
+          color: #4a4a4a;
+
+          .edit-tel {
+            float: left;
+          }
+
+          .edit-email {
+            float: left;
+          }
+
+          .edit-name-form input {
+            padding-left: 8px;
+
+          }
+          .edit-desc-form textarea {
+            font-size: 14px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: 0.3px;
+            color: #000000;
+          }
+          
+          input {
+            border-radius: 4px;
+            border: solid .5px #D8D8D8;
+            margin-top: 1px;
+            padding-left: 31px;
+            padding-right: 8px;
+            color: #000000;
+            box-sizing: border-box;
+            &:focus {
+              outline: none !important;
+              border:solid .5px #407ABD;
+            }
+          }
+          textarea {
+            border-radius: 4px;
+            border: solid .5px #D8D8D8;
+            margin-top: 1px;
+            color: #000000;
+            box-sizing: border-box;
+            word-wrap: break-word;
+            resize: none;
+            &:focus {
+              outline: none !important;
+              border:solid .5px #407ABD;
+            }
+          }
+
+          .edit-tel-form, .edit-email-form {
+            img {
+              position: absolute;
+              border-top-left-radius: 4px;
+              border-bottom-left-radius: 4px;
+              background-color: #d8d8d8;
+            }
+          }
+          
+        }
+        .action-icon {
+          position: absolute;
+          text-align: center;
+          font-size: 12px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          letter-spacing: 0.2px;
+          .cancel {
+            border-radius: 5px;
+            border: solid .5px #ffac48;
+            float: left;
+            &:hover {
+              cursor:pointer; 
+            }
+          }
+          .submit {
+            border-radius: 5px;
+            border: solid .5px transparent;
+            background-color: #ffac48;
+            color: #ffffff;
+            float: left;
+            &:hover {
+              cursor:pointer; 
+            }
+          }
+        }
+        
+      }
+
+      .content {
+        float: left;
+        border-radius: 5px;
+        background-color: #ffffff;
+        box-shadow: 0 4px 14px 7px rgba(121, 121, 121, 0.05);
+        border: solid 1px #e4e4e4;
+        .content-container {
+          height: 100%;
+          margin-left: auto;margin-right: auto;
+          .title {
+            letter-spacing: 0.4px;
+            color: #000000;
+          }
+          .desc{
+            line-height: 1.4;
+            letter-spacing: 0.2px;
+            color: #000000;
+          }
+          img {
+            float: left;
+          }
+        }
+        .edit-icon {
+          display: inline-block;
+          float: right;
+          width: 25px;
+          height: 25px;
+        }
+      }
+    }
+
+    .pagination {
+      position: fixed;
+      width: 32px;
+      top: 50%;
+      transform: translateY(-50%);
+      
+      .pagination-num {
+        margin-top: 15px;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: #ffffff;
+        background-color: #D8D8D8;
+      }
+    }
+
+  }
+}

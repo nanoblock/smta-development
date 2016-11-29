@@ -97,6 +97,7 @@
   <script>
   $(".userModal").click(function(e){
     e.preventDefault();
+    closeNav();
     styleType($(this).attr('id'));
     $("#userModal").modal();
   });
