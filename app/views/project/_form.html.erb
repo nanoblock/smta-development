@@ -1,0 +1,24 @@
+<div class="project-info">
+  <%= simple_form_for @project, url: create_project_path, method: :post do |f| %>
+    <div class="project-name">
+      <div class="project-name-text">프로젝트 제목</div>
+      <div class="project-name-form"><%= f.input :name, label: false, autofocus: true, as: :text %></div>
+    </div>
+
+    <div class="project-desc">
+      <div class="project-desc-text">프로젝트 내용</div>
+      <div class="project-desc-form"><%= f.input :desc, label: false %></div>
+    </div>
+
+    <div class="action-icon">
+      <div class="project-submit">
+        확인
+      </div>
+      <div class="project-cancel">
+        취소
+      </div>
+    </div>
+  <% end %>
+
+
+</div>

@@ -26,84 +26,50 @@
         </div>
       <% end %>
 
-      <div class="content content-one">
-        <%= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %>
-        <div class="content-container">
-          <div class="title">Line</div>
-          <div class="desc">전 세계적인 열풍을 불러온 포켓몬 고가 출시된 지 두 달이 지났는데요. 포켓몬 고의 고향 일본에서 집 보내줘. 전 세계적인 열풍을 불러온 포켓몬 고가 출시된 지 두 달이 지났는데요. 포켓몬 고의 고향 일본에서 집 보내줘.  </div>
-          <%= image_tag asset_path('landing/iphone-6-white.png') %>
-          <% if @browser.to_s != 'phone'%>
-            <%= image_tag asset_path('landing/iphone-6-white.png'), style: 'margin-left:5px;' %>
-          <% end %>
-        </div>
-        
-      </div>
+      <% @projects.each_with_index do |project, index| %>
+        <div class="content content-<%= index %>">
+          <%= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %>
+            <div class="content-container">
+              <div class="title"><%= project.name %></div>
+              <div class="desc"><%= project.desc %></div>
 
-      <div class="content content-two">
-        
-      </div>
-      <div class="content content-three">
-        
-      </div>
-      <div class="content content-four">
-        
-      </div>
+              <%= image_tag asset_path('landing/iphone-6-white.png'), id: 1 %>
+
+              <% if @browser != 'phone'%>
+                <%= image_tag asset_path('landing/iphone-6-white.png'), style: 'margin-left:5px;', class: "delete-target-img" %>
+              <% end %>
+            </div>
+        </div>
+      <% end %>
+
     </div>
-    
-    <div class="pagination">
-      <%= image_tag asset_path('profile/pagination_prev.svg'), class: 'pagination-prev' %>
-      <div class="pagination-num">1</div>
-      <div class="pagination-num">2</div>
-      <div class="pagination-num">3</div>
-      <div class="pagination-num">4</div>
-      <div class="pagination-num">5</div>
-      <%= image_tag asset_path('profile/pagination_next.svg'), class: 'pagination-next', style: 'margin-top: 15px;' %>
-    </div>
-  </div>
+
+    <% case params[:page] 
+      when "1", nil, @last_page.to_s %>
+        <%= paginate @projects, window: 4 %>
+      <% when "2", (@last_page-1).to_s %>
+        <%= paginate @projects, window: 3 %>
+      <% else %>
+        <%= paginate @projects, window: 2 %>
+    <% end %>
+
 </div>
 
 <script>
   $('.content').css('top',$('.info').height()+20+"px");
 
-  var device_width = $(document).width();
-
-  if (device_width <= 767 ) {
-    $('.content-container img').each(function(index, value) {
-      if(index == 1) {
-        $(value).css('display', 'none');
-      }
-    });
-  } else {
-    $('.content-container img').each(function(index, value) {
-      if(index == 1) {
-        $(value).css('display', 'inline-block');
-      }
-    });
-  }
-
+  deleteTargetImg($(document).width());
+  
   $(window).resize(function(e) {
-    device_width = $(this).width();
-    if (device_width <= 767) {
-      $('.content-container img').each(function(index, value) {
-        if(index == 1) {
-          $(value).css('display', 'none');
-        }
-      });
-    } else {
-      $('.content-container img').each(function(index, value) {
-        if(index == 1) {
-          $(value).css('display', 'inline-block');
-        }
-      });
-    }
+    deleteTargetImg($(this).width());
   });
 
   $('.action-icon #edit').on('click', function(e) {
-    showEditInfo();
+    showEditInfo($(document).width());
   });
 
   $('.action-icon .cancel').on('click', function(e) {
-    showInfo();
+    showInfo($(document).width());
   });
 
   $('.action-icon .submit').on('click', function(e) {
@@ -132,21 +98,25 @@
     });
   });
 
-  $('.pagination-num').on('click', function(e) {
-    clicked = $(this);
-    $('.pagination-num').each(function(index, value) {
-      $(value).css('background-color', '#D8D8D8');
-    });
-    clicked.css('background-color', '#ffac48');
-  });
+  function deleteTargetImg(width) {
+    if (width <= 767) {
+      $('.delete-target-img').each(function(index, value) {
+        $(value).css('display', 'none');
+      });
+    } else {
+      $('.delete-target-img').each(function(index, value) {
+        $(value).css('display', 'inline-block');
+      });
+    }
+  }
 
-  function showInfo(app_name, tel, app_email, desc) {
-    if (device_width > 1200) {
+  function showInfo(width, app_name, tel, app_email, desc) {
+    if (width > 1200) {
       $('.content-one').css('margin-top', '100px');
       $('.content-four').css('transform', 'translateY(-73%)');
-    } else if(device_width >= 787 ) {
+    } else if(width >= 787 ) {
       $('.content-one').css('margin-top', '100px');
-    } else if(device_width >= 320) {
+    } else if(width >= 320) {
       $('.content').css('top',$('.info').height()+20+"px");
     }
 
@@ -161,12 +131,12 @@
   }
 
   function showEditInfo() {
-    if (device_width > 1200) {
+    if (width > 1200) {
       $('.content-one').css('margin-top', '197px');
       $('.content-four').css('transform', 'translateY(-47%)');
-    } else if(device_width >= 787 ) {
+    } else if(width >= 787 ) {
       $('.content-one').css('margin-top', '186px');
-    } else if(device_width >= 320) {
+    } else if(width >= 320) {
       $('.content').css('top', '360px');
     }
     $('.info').fadeOut(300).css('display', 'none');

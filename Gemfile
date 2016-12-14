@@ -18,6 +18,7 @@ gem 'paperclip'
 #view
 gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
+gem 'dropzonejs-rails'
 gem 'browser'
 gem 'high_voltage'
 

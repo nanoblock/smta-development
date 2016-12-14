@@ -1,6 +1,7 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!, only: [:show, :update]
   before_action :set_profile, only: [:show, :update]
+  before_action :set_project, only: [:show]
 
   def create
     @profile = Profile.new(profile_params)
@@ -13,7 +14,8 @@ class ProfileController < ApplicationController
   end
 
   def show
-    @project = Project.all
+    @last_page = pagining(@projects.size)
+    @projects = @projects.page(params[:page]).per(4)
   end
 
   def update
@@ -43,12 +45,28 @@ class ProfileController < ApplicationController
     return @profile
   end
 
+  def set_project
+    return @projects = current_user.projects.all
+  end
+
   def profile_params
     params.require(:profile).permit(:app_name, :desc, :tel, :app_email)
   end
 
   def profile_avatar_params
     params.require(:profile).permit(:avatar, :app_name, :desc, :tel, :app_email)
+  end
+
+  def pagining length
+    @last_page = (length) % 4
+
+    unless @last_page.zero?
+      @last_page = (length / 4) + 1
+    else
+      @last_page = (length / 4)
+    end
+    
+    @last_page
   end
 
 end

@@ -28,17 +28,19 @@
       width: 74%;
     }
     .logo {
-      /*left: 0;*/
       margin-left: -15px;
     }
     .menu {
       margin-right: -15px;
-      /*margin-right: 156px;*/
     }
   }
 } /*(min-width: 1281px) and (max-width: 1440px)*/
-@media screen and (min-width: 1440px) { 
+@media screen and (min-width: 1439px) { 
   header {
+    .container {
+      width: 100%;
+      padding:0px;
+    }
     .logo {
       margin-left: 220px;
     }

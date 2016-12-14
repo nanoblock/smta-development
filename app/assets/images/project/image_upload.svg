@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="139px" height="255px" viewBox="0 0 139 255" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 40.3 (33839) - http://www.bohemiancoding.com/sketch -->
+    <title>B11D9AD5-9FB8-459C-A34B-32F5784A1790</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="139" height="255"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="139" height="255" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="업로드_default-" transform="translate(-280.000000, -240.000000)">
+            <g id="Group" transform="translate(280.000000, 240.000000)">
+                <use id="Rectangle-4" stroke="#FFAC48" mask="url(#mask-2)" stroke-width="2" stroke-dasharray="4,4,4" xlink:href="#path-1"></use>
+                <path d="M73,88 L82,88 L82,94 L73,94 L73,103 L67,103 L67,94 L58,94 L58,88 L67,88 L67,79 L73,79 L73,88 Z M70,115 C56.767,115 46,104.233 46,91 C46,77.767 56.767,67 70,67 C83.233,67 94,77.767 94,91 C94,104.233 83.233,115 70,115 L70,115 Z M70,61 C53.431,61 40,74.431 40,91 C40,107.569 53.431,121 70,121 C86.569,121 100,107.569 100,91 C100,74.431 86.569,61 70,61 L70,61 Z" id="plus_circle-[#1441]" fill="#FFAC48"></path>
+                <text id="프로젝트로-만들-이미지를-업로드해주세" font-family="AppleSDGothicNeo-Regular, Apple SD Gothic Neo" font-size="11" font-weight="normal" line-spacing="14" letter-spacing="0.200000003" fill="#4A4A4A">
+                    <tspan x="34.951" y="171">프로젝트로 만들</tspan>
+                    <tspan x="14.178" y="185">이미지를 업로드해주세요.</tspan>
+                </text>
+                <text id="이미지-가져오기" font-family="AppleSDGothicNeo-Bold, Apple SD Gothic Neo" font-size="12" font-weight="bold" line-spacing="14" letter-spacing="0.218181819" fill="#000000">
+                    <tspan x="30.5832727" y="143.16">이미지 가져오기</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>
