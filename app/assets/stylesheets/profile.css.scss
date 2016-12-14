@@ -708,7 +708,9 @@
         }
       }
       .pagination {
-        margin-left: 67px;
+        right: 0;
+        /*margin-left: 67px;*/
+        margin-right: 220px;
         img {
           width: 33px;
           height: 32px;
