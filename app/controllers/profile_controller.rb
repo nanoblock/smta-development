@@ -4,8 +4,9 @@ class ProfileController < ApplicationController
   before_action :set_project, only: [:show]
 
   def create
-    @profile = Profile.new(profile_params)
+    @profile = Profile.new(profile_avatar_params)
     current_user.profile = @profile
+
     if @profile.save
       render nothing: true, status: :ok
     else
@@ -15,7 +16,7 @@ class ProfileController < ApplicationController
 
   def show
     @last_page = pagining(@projects.size)
-    @projects = @projects.page(params[:page]).per(4)
+    @projects = @projects.order('created_at DESC').page(params[:page]).per(4)
   end
 
   def update
@@ -41,6 +42,8 @@ class ProfileController < ApplicationController
       @profile.desc = "수정 버튼을 눌러 어플에 대한 정보를 입력하세요."
       @profile.tel = "전화번호"
       @profile.app_email = "이메일"
+      current_user.profile = @profile
+      @profile.save!
     end
     return @profile
   end

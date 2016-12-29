@@ -35,3 +35,6 @@ gem 'nokogiri'
 
 #pagenate
 gem 'kaminari'
+
+#search
+gem 'ransack'

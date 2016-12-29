@@ -10,6 +10,12 @@
     .menu {
       margin-right: 30px;
     }
+    .searchbox {
+      width: 40%;
+      .search-field {
+        width: 70%;
+      }
+    }
   }
 }   /*(min-width: 321px) and (max-width: 480px)*/
 @media screen and (min-width: 768px) { 
@@ -19,6 +25,12 @@
     }
     .menu {
       margin-right: 50px;
+    }
+    .searchbox {
+      width: 40%;
+      .search-field {
+        width: 80%;
+      }
     }
   }
 }
@@ -36,6 +48,12 @@
       /*margin-right: 130px;*/
       margin-right: -15px;
     }
+    .searchbox {
+      width: 50%;
+      .search-field {
+        width: 80%;
+      }
+    }
   }
 } /*(min-width: 1281px) and (max-width: 1440px)*/
 @media screen and (min-width: 1439px) { 
@@ -49,6 +67,12 @@
     }
     .menu {
       margin-right: 220px;
+    }
+    .searchbox {
+      width: 50%;
+      .search-field {
+        width: 80%;
+      }
     }
   }
 }
@@ -80,6 +104,40 @@ header {
     height: 60px;
     line-height: 100%;
     vertical-align: middle;
+  }
+  .searchbox {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left:55px;
+    right:0;
+    margin: auto;
+    /*width:50%;*/
+    height: 40px;
+    line-height: 30px;
+    border: solid 1px #407abd;
+    .search-field {
+      float: left;
+      padding-left: 20.8px;
+      height: 38px;
+      font-size: 18px;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 0.4px;
+      color: #000000;
+      border:none;
+
+      &:focus {
+        outline: none !important;
+        border:none;
+      }
+    }
+    .search-submit {
+      float: right;
+      /*width: 25px;*/
+      height: 100%;
+      object-fit: contain;
+    }
   }
 }
 

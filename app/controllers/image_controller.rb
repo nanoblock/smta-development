@@ -9,18 +9,19 @@ class ImageController < ApplicationController
     @image = @project.images.build(image_params)
 
     if @image.save
-      render status: 200, json: @image, nothing: true
+      render status: 200, json: @image
     else
       render action: 'new'
     end
   end
 
   def update
-    @image = @project.images.find(params[:image_id])
-    @image.xml_path = params[:xml_path]
+    # @image = @project.images.find(params[:image_id])
+    # @image.xml_path = params[:xml_path]
+    @image = @project.images.build(image_params)
 
     if @image.save
-      render nothing: true, status: :ok
+      render nothing: true, status: :ok, json: {"project": @project, "image": @image}
     else
       render nothing: true, status: 304
     end
@@ -48,7 +49,21 @@ class ImageController < ApplicationController
   end
 
   def set_project
-    return @project = current_user.projects.find_by_name(params[:project_name])
+    @project = current_user.projects.find_by_name(params[:project_name])
+    unless @project.nil?
+      return @project
+    else
+      set_project_by_id(params[:project_id])
+    end
+  end
+
+  def set_project_by_id(id)
+    @project = current_user.projects.find(id)
+    unless @project.nil?
+      return @project
+    else
+      redirect_to root_path
+    end
   end
 
 end

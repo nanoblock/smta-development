@@ -10,8 +10,8 @@
         
         <% @images.each do |image| %>
           <div class="dz-preview dz-file-preview">
-          <div class="dz-remove image-remove">DELETE</div>
-          <div class="overlay"><span>Image Link</span></div>
+          <div class="dz-remove image-remove">삭제</div>
+          <div class="overlay"><span>이미지 연결</span></div>
             <%= image_tag asset_path(image.photo(:thumb)), class: 'dz-thumbnail', id: "#{image.id}" %>
           <div class="file-name"><%= image.photo_file_name %></div>
           </div>
@@ -24,9 +24,18 @@
       
       </div>
     </div>
+
+    <form id="hrefPost">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input name="image_id" id="image_id" type="" value="">
+    </form>
   </div>
 
 <script type="text/javascript">
+  function hrefPost(url, param) {
+    $('#hrefPost #image_id').attr('value', param);
+    $('#hrefPost').attr({action: url, method: 'post'}).submit();
+  }
 
   $('.action-icon .project-submit').on('click', function(e) {
     param_project_name = $('.project-name-form textarea').val();
@@ -53,7 +62,7 @@
 
   $(".overlay").on('click', function(event) {
     id = $(this).parent().find('.dz-thumbnail').attr('id');
-    // window.location.href = "/project/"+<= params[:project_id] %>+"/link/"+id;
+    hrefPost("/project/<%= params[:project_name] %>/relation", id);
   });
 
   $('.dz-remove').on('click', function(e) {
@@ -120,8 +129,7 @@
       });
 
       $(file.previewTemplate).find('.overlay').on('click', function(event) {
-        console.log("overlay clicked!!");
-        // window.location.href = "/project/"+<= params[:project_id] %>+"/link/"+id;
+        hrefPost("/project/<%= params[:project_name] %>/relation", id);
       });
 
     });

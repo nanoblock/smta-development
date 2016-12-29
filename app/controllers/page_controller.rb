@@ -3,4 +3,8 @@ class PageController < ApplicationController
   end
   def home
   end
+  def privacy
+  end
+  def term
+  end
 end

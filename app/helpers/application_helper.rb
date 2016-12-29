@@ -11,4 +11,8 @@ module ApplicationHelper
     @devise_mapping ||= Devise.mappings[:user]
   end
 
+  # def 
+  #   controller.action_name
+  # end
+
 end

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="19px" height="18px" viewBox="0 0 19 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>mail_bt</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="검색-페이지_프로젝트" transform="translate(-497.000000, -186.000000)">
+            <g id="Group-2" transform="translate(450.000000, 120.000000)">
+                <g id="버튼들" transform="translate(21.000000, 66.000000)">
+                    <g id="mail_bt" transform="translate(26.000000, 0.000000)">
+                        <rect id="Rectangle-6-Copy" fill="#D8D8D8" x="0" y="0" width="18.0046148" height="18" rx="4"></rect>
+                        <path d="M14.6,5.52733333 L9,10.212 L3.4,5.52066667 L3.4,5.33333333 L14.6,5.33333333 L14.6,5.52733333 Z M3.4,12.6666667 L3.4,7.29666667 L9,11.9866667 L14.6,7.302 L14.6,12.6666667 L3.4,12.6666667 Z M2,14 L16,14 L16,4 L2,4 L2,14 Z" id="email-[#1573]" fill="#FFFFFF"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

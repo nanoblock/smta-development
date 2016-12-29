@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="120px" height="180px" viewBox="0 0 120 180" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 5</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="120" height="180"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="120" height="180" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="업로드_만들기_연결2" transform="translate(-41.000000, -782.000000)">
+            <rect id="Rectangle-15" fill="#0A2646" x="0" y="724" width="1440" height="300"></rect>
+            <g id="Group-4" transform="translate(41.000000, 782.000000)">
+                <g id="Group-5">
+                    <use id="Rectangle-4" stroke="#FFAC48" mask="url(#mask-2)" stroke-width="5" stroke-dasharray="4,4,4" fill-opacity="0" fill="#FFFFFF" xlink:href="#path-1"></use>
+                    <path d="M63,87 L72,87 L72,93 L63,93 L63,102 L57,102 L57,93 L48,93 L48,87 L57,87 L57,78 L63,78 L63,87 Z M60,114 C46.767,114 36,103.233 36,90 C36,76.767 46.767,66 60,66 C73.233,66 84,76.767 84,90 C84,103.233 73.233,114 60,114 L60,114 Z M60,60 C43.431,60 30,73.431 30,90 C30,106.569 43.431,120 60,120 C76.569,120 90,106.569 90,90 C90,73.431 76.569,60 60,60 L60,60 Z" id="plus_circle-[#1441]" fill="#FFAC48"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

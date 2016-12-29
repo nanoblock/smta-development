@@ -1,10 +1,10 @@
 <div id="mySidenav" class="sidenav">
   <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-  <a href="#">HOME</a>
-  <a href="#">UPLOAD</a>
-  <a onclick="closeNav()">PROFILE</a>
+  <%= link_to 'HOME', project_search_path, onclick: 'closeNav()' %>
 
   <% if user_signed_in? %>
+    <%= link_to "UPLOAD", new_project_path, method: :get, onclick: 'closeNav()' %>
+    <%= link_to "PROFILE", profile_path, method: :get, onclick: 'closeNav()' %>
     <%= link_to "LOGOUT", destroy_user_session_path, method: :delete, onclick: 'closeNav()' %>
   <% else %>
     <%= link_to "LOGIN", '', class: "userModal", id: 'login', onclick: 'closeNav()' %>
@@ -14,23 +14,13 @@
 <header>
   <div class="navbar navbar-fixed-top navbar-default">
     <div class="container">
-    <%= link_to image_tag('/assets/header/logo.svg', class: 'logo vertical-center', size: '106x38'), root_path %>
+    <%= link_to image_tag('/assets/header/logo.svg', class: 'logo vertical-center', size: '106x38'), project_search_path %>
+
+    <% if controller.action_name == 'search' %>
+      <%= render 'shared/header_form' %>
+    <% end %>
+
     <%= image_tag '/assets/header/menu_icon.svg', class: 'menu vertical-center', size: '27x27', onClick: 'openNav()'%>
     </div>
   </div>
 </header>
-
-<script type="text/javascript">
-  function openNav() {
-    if ('<%= @browser %>' == 'phone') {
-      $("#mySidenav").css('width', '100%');  
-    } else {
-      $("#mySidenav").css('width', '470px');
-    }
-    
-  }
-
-  function closeNav() {
-    $("#mySidenav").css('width', 0);
-  }
-</script>

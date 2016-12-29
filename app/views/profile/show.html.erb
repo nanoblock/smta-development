@@ -12,7 +12,7 @@
             </div>
             <div class="action-icon">
               <%= link_to image_tag(asset_path('profile/call.svg'), class: 'icon'), "tel:"+@profile.tel %>
-              <%= image_tag asset_path('profile/mail.svg'), class: 'icon' %>
+              <%= mail_to @profile.app_email, image_tag(asset_path('profile/mail.svg'), class: 'icon') %>
               <%= image_tag asset_path('profile/edit.svg'), class: 'icon', id: 'edit' %>
             </div>
             <div class="sub-text">
@@ -28,16 +28,23 @@
 
       <% @projects.each_with_index do |project, index| %>
         <div class="content content-<%= index %>">
-          <%= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %>
+          <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), show_project_path(project.name) %>
+          <!-- <= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %> -->
             <div class="content-container">
               <div class="title"><%= project.name %></div>
               <div class="desc"><%= project.desc %></div>
 
-              <%= image_tag asset_path('landing/iphone-6-white.png'), id: 1 %>
-
-              <% if @browser != 'phone'%>
-                <%= image_tag asset_path('landing/iphone-6-white.png'), style: 'margin-left:5px;', class: "delete-target-img" %>
+              <% unless project.images.empty? %>
+                <%= image_tag asset_path(project.images.first.photo(:thumb)) %>
+                <% if @browser != 'phone'%>
+                  <% unless project.images.second.nil? %>
+                    <%= image_tag asset_path(project.images.second.photo(:thumb)), style: 'margin-left:5px;', class: "delete-target-img" %>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= link_to image_tag(asset_path('project/image_upload.svg'), class: 'default_img'), show_project_path(project.name) %>
               <% end %>
+
             </div>
         </div>
       <% end %>
@@ -54,7 +61,7 @@
     <% end %>
 
 </div>
-
+</div>
 <script>
   $('.content').css('top',$('.info').height()+20+"px");
 
@@ -78,24 +85,30 @@
     param_tel = $('.edit-tel-form input').val();
     param_app_email = $('.edit-email-form input').val();
 
-    $.ajax({
-      type: "PUT",
-      url: "<%= profile_path %>",
-      data: { profile: { 
-        app_name: param_app_name, 
-        desc: param_desc, 
-        tel: param_tel, 
-        app_email: param_app_email}
-      },
-      success: function(data) {
-        if($('.edit-info').css('display') != 'none') {
-          showInfo(param_app_name, param_tel, param_app_email, param_desc);
-        }
-      },
-      error: function(data) {
+    if (!isNullOrUndefined(param_app_name) && !isNullOrUndefined(param_desc) && !isNullOrUndefined(param_tel) && !isNullOrUndefined(param_app_email)){
 
-      }
-    });
+      $.ajax({
+        type: "PUT",
+        url: "<%= profile_path %>",
+        data: { profile: { 
+          app_name: param_app_name, 
+          desc: param_desc, 
+          tel: param_tel, 
+          app_email: param_app_email}
+        },
+        success: function(data) {
+          if($('.edit-info').css('display') != 'none') {
+            showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc);
+          }
+        },
+        error: function(data) {
+
+        }
+      });
+    } else {
+      showInfo($(document).width());
+    }
+
   });
 
   function deleteTargetImg(width) {
@@ -112,10 +125,10 @@
 
   function showInfo(width, app_name, tel, app_email, desc) {
     if (width > 1200) {
-      $('.content-one').css('margin-top', '100px');
-      $('.content-four').css('transform', 'translateY(-73%)');
+      $('.content-0').css('margin-top', '100px');
+      $('.content-3').css('transform', 'translateY(-73%)');
     } else if(width >= 787 ) {
-      $('.content-one').css('margin-top', '100px');
+      $('.content-0').css('margin-top', '100px');
     } else if(width >= 320) {
       $('.content').css('top',$('.info').height()+20+"px");
     }
@@ -130,12 +143,12 @@
     $('.info').fadeIn(300).css('display', 'block');
   }
 
-  function showEditInfo() {
+  function showEditInfo(width) {
     if (width > 1200) {
-      $('.content-one').css('margin-top', '197px');
-      $('.content-four').css('transform', 'translateY(-47%)');
+      $('.content-0').css('margin-top', '197px');
+      $('.content-3').css('transform', 'translateY(-47%)');
     } else if(width >= 787 ) {
-      $('.content-one').css('margin-top', '186px');
+      $('.content-0').css('margin-top', '186px');
     } else if(width >= 320) {
       $('.content').css('top', '360px');
     }

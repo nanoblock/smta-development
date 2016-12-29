@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="65px" height="19px" viewBox="0 0 65 19" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 39.1 (31720) - http://www.bohemiancoding.com/sketch -->
+    <title>download_bt copy 4</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="65" height="19" rx="3"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="65" height="19" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Welcome" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="검색-페이지_프로젝트" transform="translate(-523.000000, -186.000000)">
+            <g id="Group-2" transform="translate(450.000000, 120.000000)">
+                <g id="버튼들" transform="translate(21.000000, 66.000000)">
+                    <g id="download_bt-copy-4" transform="translate(52.000000, 0.000000)">
+                        <use id="Rectangle-6-Copy-2" stroke="#407ABD" mask="url(#mask-2)" stroke-width="2" fill="#FFFFFF" xlink:href="#path-1"></use>
+                        <text id="다운로드" font-family="AppleSDGothicNeo-Regular, Apple SD Gothic Neo" font-size="10" font-weight="normal" letter-spacing="0.181818187" fill="#407ABD">
+                            <tspan x="23.016129" y="13.2222222">다운로드</tspan>
+                        </text>
+                        <path d="M14.7004351,7.97725556 L14.0318386,7.23864375 L12.7462287,8.47203403 L12.7462287,4.22222222 L11.7542458,4.22222222 L11.7542458,8.47203403 L10.4924435,7.23864375 L9.8169031,7.97725556 L12.2710689,10.3500587 L14.7004351,7.97725556 Z M17.2101519,14.3819444 L7.29032258,14.3819444 L7.29032258,9.30208333 L9.27428844,9.30208333 L9.27428844,10.3180556 L8.28230551,10.3180556 L8.28230551,13.3659722 L16.2181689,13.3659722 L16.2181689,10.3180556 L15.226186,10.3180556 L15.226186,9.30208333 L17.2101519,9.30208333 L17.2101519,14.3819444 Z" id="arrow_in_down-[#384]" fill="#407ABD"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

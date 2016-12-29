@@ -1,0 +1,16 @@
+<%= render 'shared/usermodal' %>
+<%= render 'shared/header'%>
+<%= yield %>
+
+<%case controller.action_name
+  when "relation"%>
+  <% when "preview" %>
+  <% else %>
+    <%= render 'shared/footer' %>
+  <%end%>
+
+<% unless controller.action_name == "relation" %>
+  
+<% end %>
+
+<%= javascript_include_tag 'usermodal' %>

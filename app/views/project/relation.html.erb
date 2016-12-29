@@ -1,0 +1,415 @@
+<div class="relation">
+<div class="drop-right" style="display:none;">
+  <%= image_tag asset_path('project/relation/page_link_drop_right.png'), class: 'message-box'%>
+  <div class="title">연결하기:</div>
+  <%= image_tag asset_path('project/relation/page_link_drop_right_close.svg'), class: 'close' %>
+
+  <div class="dropdown">
+    <div class="drop-title">선택하기</div>
+      <div class="arrow-down"> <%= image_tag asset_path('project/relation/arrow-down.svg') %> </div>
+      <div class="dropdown-content">
+      <% @images.each do |images| %>
+        <div class="text-wrap"><div class="text" id="<%= images.id %>"><%= images.photo_file_name %></div></div>
+      <% end %>
+      </div>
+  </div>
+  <div class="check">
+    확인
+  </div>
+
+</div>
+<!-- left: 500px; top: 600px; -->
+  <div class="container">
+
+    <div class="top-menu">
+        <div class="preview-mode" style="float: left;">
+          <%= image_tag asset_path('project/preview.png') %>
+          <div class="top-menu-dropdown-preview">
+            <%= image_tag asset_path('project/preview_hover.svg') %>
+          </div>
+        </div>
+        <div class="link-mode" style="float: left;">
+          <%= image_tag asset_path('project/page_link_active.png') %>
+          <div class="top-menu-dropdown-link">
+            <%= image_tag asset_path('project/page_link_hover.svg') %>
+          </div>
+        </div>
+        <div class="save-mode" style="float: left;">
+          <%= image_tag asset_path('project/save.png') %>
+          <div class="top-menu-dropdown-save">
+            <%= image_tag asset_path('project/save_hover.svg') %>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+    
+    <%= image_tag asset_path('project/i-phone-6-silver.png'), class: "mobile-wrap" %>
+    <div class="mobile-view" style="background-image: url(<%= asset_path @image.photo.url %>)">
+      <div id="canvas"></div>
+    </div>
+    
+<!-- https://placeholdit.imgix.net/~text?bg=F6F6F6&txtclr=000000) -->
+    <div class="navbar-fixed-bottom menu-image-link">
+      <div class="elements">
+          <div class="title">이미지 총 <%= @images.size %>장</div>
+          <div class="link-menu-close"></div>
+        <div class="image-group">
+          <div class="image-placeholer">
+            <div>
+              <%= image_tag asset_path('project/relation/link_upload.svg'), class: "upload-image", style: "margin-top: -170px;" %>
+            </div>
+            <div class="text" style="visibility:hidden;">hidden</div>
+          </div>
+
+          <% @images.each do |images| %>
+            <div class="image-placeholer link">
+              <%= image_tag "#{images.photo(:thumb)}", class: "link-images", id: "#{images.id}" %>
+              <div class="text" id="<%= images.id %>"><%= images.photo_file_name %></div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <form id="hrefPost">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input name="image_id" id="image_id" type="hidden" value="">
+  </form>
+  <div class="preview-name"><%= link_to @project.name, show_project_path(@project.name) %></div>
+  <div class="preview-line"></div>
+</div>
+
+<script type="text/javascript">
+  var select_image_id = null
+
+  function hrefPost(url, param) {
+    $('#hrefPost #image_id').attr('value', param);
+    $('#hrefPost').attr({action: url, method: 'post'}).submit();
+  }
+
+  $(document).on("keydown", function(e) {
+    if (e.which == 8) {
+      $('.clicked').each(function(index, value) {
+        $(this).remove();
+        $(".menu-image-link").fadeOut(300);
+        $(".drop-title").text("선택하기");
+        $(".drop-right").fadeOut(300);
+
+      });
+    }
+  });
+
+  // $('body').bind("click", function(e) {
+  //   $(".menu-image-link").fadeOut(300);
+  //   $(".drop-right").fadeOut(300);
+  // });
+
+  $('.close').on('click', function(e) {
+    $(".menu-image-link").fadeOut(300);
+    $(".drop-right").fadeOut(300);
+    $('.gen-box-tracker').attr('id', '');
+    $(".link-images").each(function(index, value) {
+      $(".gen-box-tracker").removeClass('.gen-box-tracker');
+    });
+    $(".drop-title").text("선택하기");
+  });
+
+  $(".top-menu").children().on("click", function(e) {
+    var clazz = $(this).attr('class');
+    var id = <%= @image.id %>
+    if(clazz == "save-mode") {
+      gen_boxs = $('*[class^="gen_box_"]');
+      saveClickableArea();
+      hrefPost("/project/<%= params[:project_name] %>/preview", id);
+      // location.href = "<= show_project_path(@project.name) %>";
+    } else if(clazz == "preview-mode") {
+      hrefPost("/project/<%= params[:project_name] %>/preview", id);
+      // location.href = "/project/<= params[:project_name] %>/preview/"+id;
+    }
+  });
+
+  $(".link-menu-close").on('click', function(e) {
+    $(".menu-image-link").fadeOut(300);
+  });
+
+  $(".link").children().on("click", function(e) {
+    var children = $(this);
+    select_image_id = children.attr('id');
+    $('.gen-box-tracker').attr('id', select_image_id);
+    $(".gen-box-tracker").removeClass('gen-box-tracker');
+    $(".menu-image-link").fadeOut(300);
+    $(".drop-right").fadeOut(300);
+    $(".drop-title").text("선택하기");
+  });
+
+  $(".dropdown").on('click', function(e) {
+    if ( $(".dropdown-content").css('display') == 'none') {
+      $(".dropdown-content").fadeIn(200);
+      $(".menu-image-link").fadeOut(300);
+    } else {
+      $(".dropdown-content").fadeOut(200);
+    }
+  });
+
+  $(".dropdown-content").children().on('click', function(e) {
+    children = $(this).children();
+    select_image_id = children.attr('id');
+    $('.gen-box-tracker').attr('id', select_image_id);
+    $(".link-images").each(function(index, value) {
+      if ($(value).attr('id') == $(".gen-box-tracker").attr('id') && isNullOrUndefined($(".gen-box-tracker").attr('id')) != true) {
+        $(value).css('border', 'solid 5px yellow');
+        selectText = $(value).parent().find(".text").text();
+        $(".text-wrap").find(".text").each(function(dropIndex, dropValue) {
+          if($(dropValue).text() == selectText) {
+            $(".drop-title").text(selectText);
+          }
+        });
+      } else {
+        $(value).css('border', 'solid 5px transparent');
+      }
+    });
+  });
+
+  $(".check").on('click', function(e) {
+    $(".gen-box-tracker").removeClass('gen-box-tracker');
+    $(".menu-image-link").fadeOut(300);
+    $(".drop-right").fadeOut(300);
+    $(".drop-title").text("선택하기");
+  });
+
+  var mobileView = $('.mobile-view');
+
+  var main_content = $('#canvas');
+  var gen_box_count  = 1;
+
+  var main_content_left = parseInt(main_content.offset().left);
+  var main_content_top = parseInt(main_content.offset().top);
+  var main_content_right = parseInt(main_content_left) + parseInt(mobileView.width());
+  var main_content_bottom = parseInt(main_content_top) + parseInt(mobileView.height());
+  var name_sequence = 1;
+
+  main_content.on({
+    dragstart: function(e) {
+      console.log("comecome");
+      x = e.pageX,
+      y = e.pageY;
+      $(".hover").css("cursor", "move");
+      $(".drop-right").fadeOut(300);
+      $(".drop-title").text("선택하기");
+      $(".menu-image-link").fadeOut(300);
+    },
+    resizestart: function(e) {
+
+    },
+    dragstop: function(e) {
+      $(".hover").css("cursor", "pointer");
+    }
+  });
+  var selected_value;
+
+  main_content.selectable({
+    distance: 50,
+    
+    create: function(e) {
+      <% @image.clickables.each do |clickables| %>
+        drawGenBox(gen_box_count, "<%= clickables.target_image_id %>", "<%= clickables.width %>", "<%= clickables.height %>", "<%= clickables.left %>", "<%= clickables.top %>");
+      <% end %>
+
+    },
+
+    start: function(e) {
+      x_begin = e.pageX,
+      y_begin = e.pageY;
+    },
+
+    stop: function(e) {
+      x_end = e.pageX,
+      y_end = e.pageY;
+
+      drawGenBox(gen_box_count);
+    }});
+
+    function drawGenBox(box_count, box_target_image_id, box_width, box_height, box_left, box_top) {
+      var gen_box = null;
+      if(isNullOrUndefined(box_width)) {
+        if( x_end - x_begin >= 0 ) {
+          width  = x_end - x_begin,
+          drag_left = false;
+        } else {
+          width  = x_begin - x_end,
+          drag_left = true;
+        }
+      } else {
+        width = parseInt(box_width);
+      }
+
+      if(isNullOrUndefined(box_height)) {
+        if( y_end - y_begin >= 0) {
+          height = y_end - y_begin,
+          drag_top = false;
+          
+        } else {
+          height = y_begin - y_end,
+          drag_top = true;
+        }
+      } else {
+        height = parseInt(box_height);
+      }
+
+      main_content.append('<div class="gen_box_' + box_count + ' '+ "hover"+'"></div>');
+
+      gen_box = $('.gen_box_' + box_count);
+
+      $(".hover").hover(function() {
+        $(".hover").css("cursor", "pointer");
+      });
+
+      if(isNullOrUndefined(box_target_image_id) != true) {
+        $(".link-images").each(function(index, value) {
+          if($(value).attr('id') == box_target_image_id) {
+            gen_box.attr('id', box_target_image_id);
+          }
+        });
+      }
+
+      gen_box.on("click", function(e) {
+        e.stopPropagation();
+
+        clickedGenBox = $(this);
+
+        gen_box_left = parseInt(gen_box.offset().left);
+        gen_box_right = parseInt(gen_box_left + gen_box.width());
+
+        $(".drop-right").css({
+            'top'   : gen_box.offset().top,
+            'left'  : gen_box_right
+          });
+        
+        $(".clicked").each(function(index, value) {
+          if( clickedGenBox.attr('class') == $(value).attr('class')) {
+            // $(".menu-image-link").fadeOut(300);
+            // $(".drop-right").fadeOut(300);
+            $(value).removeClass('clicked');
+            e.stopPropagation();
+          }
+        });
+
+        $(".gen-box-tracker").each(function(index, value) {
+          if( clickedGenBox.attr('class') == $(value).attr('class') ){
+            $(value).removeClass('gen-box-tracker');
+            e.stopPropagation();
+          }
+        });
+
+        gen_box.addClass('gen-box-tracker');
+        gen_box.addClass('clicked');
+        gen_box.attr('name', name_sequence);
+        name_sequence++;
+
+        if( $('.gen-box-tracker').size() != 1) {
+          var first = null;
+          var second = null;
+        $('.gen-box-tracker').each(function(index, value) {
+            if(index == 0) {
+              first = $(value);
+            } else {
+              second = $(value);
+            }
+          });
+          if (first.attr('name') > second.attr('name')){
+            second.removeClass('gen-box-tracker');
+          } else {
+            first.removeClass('gen-box-tracker');
+          }
+        }
+
+        $(".link-images").each(function(index, value) {
+          if ($(value).attr('id') == $(".gen-box-tracker").attr('id') && isNullOrUndefined($(".gen-box-tracker").attr('id')) != true) {
+            $(value).css('border', 'solid 5px yellow');
+            selectText = $(value).parent().find(".text").text();
+
+            $(".text-wrap").find(".text").each(function(dropIndex, dropValue) {
+              if($(dropValue).text() == selectText) {
+                $(".drop-title").text(selectText);
+              }
+            });
+          } else {
+            $(value).css('border', 'solid 5px transparent');
+          }
+        });
+
+
+        $(".menu-image-link").fadeIn(300);
+        $(".drop-right").fadeIn(300);
+      });
+
+      gen_box.css({
+        // 'rgba(0, 0, 0, 0.8)'
+        'background' : 'rgba(0, 0, 0, 0.4)',
+        'width'      : width,
+        'height'     : height,
+        'position'   : 'absolute'
+      })
+      .draggable({ containment: "parent" })
+      .resizable({ containment: "parent" });
+
+      if(isNullOrUndefined(box_left)) {
+        drag_left ? gen_box.offset({ left: x_end }) : gen_box.offset({ left: x_begin });
+      } else {
+        gen_box.offset({ left: parseInt(box_left)+parseInt(main_content_left) });
+      }
+      
+      if(isNullOrUndefined(box_top)) {
+        drag_top ? gen_box.offset({ top: y_end }) : gen_box.offset({ top: y_begin });
+      } else {
+        gen_box.offset({ top: parseInt(box_top)+parseInt(main_content_top) });
+      }
+      gen_box_count++;
+    }; //drawGenBox
+
+    function check_link() {
+      gen_boxs.each(function(index, value) {
+        if( isNullOrUndefined($(this).attr('id')) ) {
+          alert("이미지를 연결해 주세요");
+          e.preventDefault();
+        }
+      });
+    } //check_link
+
+    function destroyClickableArea() {
+      $.ajax({
+        type: "POST",
+        url: "<%= destroy_all_project_image_clickables_path(params[:project_name], @image_id) %>",
+        success: function(data) {
+
+        },
+        error: function(data) {
+
+        }
+      });
+    } //destroyClickableArea
+
+    function saveClickableArea() {
+      destroyClickableArea();
+      gen_boxs.each(function(index, value) {
+        $.ajax({
+          type: "POST",
+          url: "<%= project_image_clickables_path(params[:project_name], @image_id) %>",
+          data: { clickable: { 
+            target_image_id: $(this).attr('id'),
+            top: (parseInt($(this).css('top'))),
+            left: (parseInt($(this).css('left'))),
+            width: $(this).width(),
+            height: $(this).height() } },
+          success: function(data) {
+
+          },
+          error: function(data) {
+
+          }
+        });
+      });
+    } //saveClickableArea
+
+    function isNullOrUndefined(variable) { return variable === null || variable === undefined; }
+</script>

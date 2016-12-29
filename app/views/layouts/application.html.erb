@@ -1,18 +1,28 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Smta</title>
+  <title>SMTA</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'header' %>
+  
   <%= csrf_meta_tags %>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js'></script>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
 </head>
 
 <body>
-  <%= render 'shared/header'%>
-  <%= yield %>
-  <%= render 'shared/footer' %>
+  
+  <%= render 'layouts/layout' %>
+  
+    
+  <!-- < end %> -->
+  <!-- < content_for :header do %>
+    <= javascript_include_tag "page.js" %>
+  < end %> -->
+  <!-- <= render 'shared/usermodal' %> -->
+    
+  
 </body>
 
 </html>

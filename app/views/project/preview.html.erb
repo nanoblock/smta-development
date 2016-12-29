@@ -1,0 +1,92 @@
+<div class="preview-view">
+  <div class="container">
+
+      <div class="top-menu">
+        <div class="preview-mode" style="float: left;">
+          <%= image_tag asset_path("project/preview_active.png") %>
+          <div class="top-menu-dropdown-preview">
+            <%= image_tag asset_path('project/preview_hover.svg') %>
+          </div>
+        </div>
+        <div class="link-mode" style="float: left;">
+          <%= image_tag asset_path("project/page_link.png") %>
+          <div class="top-menu-dropdown-link">
+            <%= image_tag asset_path('project/page_link_hover.svg') %>
+          </div>
+        </div>
+        <div class="save-mode" style="float: left;">
+          <%= image_tag asset_path("project/save.png") %>
+          <div class="top-menu-dropdown-save">
+            <%= image_tag asset_path('project/save_hover.svg') %>
+          </div>
+        </div>
+        <div style="clear: both;"></div>
+    </div>
+
+    <%= image_tag asset_path("project/i-phone-6-silver.png"), class: "mobile-wrap" %>
+
+    <% @images.each do |images|%>
+      <div class="mobile-view" style="background-image: url(<%= asset_path images.photo.url %>)" id="<%= images.id %>">
+        <% images.clickables.each do |clickables| %>
+          <a class="clickable" id="<%= clickables.target_image_id %>" name="<%= images.id %>" href="javascript:;" style="top: <%= clickables.top %>px; left: <%= clickables.left %>px; width: <%= clickables.width %>px; height: <%= clickables.height %>px;"></a>
+        <% end %>
+      </div>
+    <% end %>
+
+  </div>
+  <div class="preview-name"><%= link_to @project.name, show_project_path(@project.name) %></div>
+  <div class="preview-line"></div>
+
+  <form id="hrefPost">
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <input name="image_id" id="image_id" type="hidden" value="">
+  </form>
+
+</div>
+
+<script type="text/javascript">
+  function hrefPost(url, param) {
+    $('#hrefPost #image_id').attr('value', param);
+    $('#hrefPost').attr({action: url, method: 'post'}).submit();
+  }
+
+  $(".mobile-view").each(function(index, value) {
+    if($(value).attr('id') == <%= @image.id %>) {
+      $(value).css('display', 'block');
+      return false;
+    }  
+  });
+
+  $(".top-menu").children().on("click", function(e) {
+    var clazz = $(this).attr('class');
+
+    var id = null;
+    $('.mobile-view').each(function(index, value) {
+      if ($(value).css('display') == 'block') {
+        id = $(value).attr('id');
+      }
+    });
+    if(clazz == "link-mode") {
+      hrefPost("/project/<%= params[:project_name] %>/relation", id);
+    } else if(clazz == "save-mode") {
+      location.href = "<%= show_project_path(@project.name) %>";
+    }
+  });
+
+  $(".clickable").parent().on("click", function(e) {
+    $(".clickable").effect( "highlight", {color: "rgba(0, 0, 0, 0.7)"}, 500, null);
+  });
+
+  $(".clickable").on('click', function(e) {
+    currentArea = $(this);
+    currentArea.parent().css('display', 'none');
+    $(".mobile-view").each(function(index, value) {
+      if( currentArea.attr('id') == $(value).attr('id') ) {
+        $(value).effect('fade', null, 200, function() {
+          $(value).css('display', 'block');
+        });
+      }
+    });
+    e.stopPropagation();
+  });
+</script>

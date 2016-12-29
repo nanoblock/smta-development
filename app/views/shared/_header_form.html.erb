@@ -1,0 +1,21 @@
+<div class="searchbox">
+  <%= search_form_for @search, url: project_search_path, method: :post do |f| %>
+    <%= f.text_field :name_cont, class: 'search-field' %>
+    <%= image_submit_tag asset_path('header/header_search_icon.png'), class: 'search-submit'%>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  if ("<%= @browser %>" == "phone") {
+    $('.searchbox').hide();
+  }
+
+  $(window).resize(function(e) {
+    if( $(this).width() <= 430 ) {
+      $('.searchbox').hide();
+    } else {
+      $('.searchbox').show();
+    }
+  });
+
+</script>
