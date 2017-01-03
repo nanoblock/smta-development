@@ -60,10 +60,18 @@
             font-weight: normal;
             font-style: normal;
             font-stretch: normal;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
             .app_name {
               font-size: 10px;
               letter-spacing: 0.2px;
               color: #838383;
+              max-width: 100%;
+              -webkit-line-clamp: 1;
+              -webkit-box-orient: vertical;
+              overflow: hidden;
+              text-overflow: ellipsis;
             }
             .project-name {
               font-size: 17px;
@@ -162,16 +170,24 @@
       top: 50%;
       right: 12.9%;
       transform: translateY(-50%);
-      
       .pagination-num {
         text-align: center;
         background-color: #D8D8D8;
-        a {
+        img {
+          width: 33px;
+          height: 32px;
+        }
+        a,
+        .text {
           width: 100%;
           margin-top: 15px;
           color: #ffffff;
           text-align: center;
           letter-spacing: 0.4px;
+
+          width: 33px;
+          height: 32px;
+          font-size: 22px;
         }
       }
       .current {

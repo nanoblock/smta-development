@@ -1,15 +1,36 @@
-<h2>Forgot your password?</h2>
+<div class="reset-pw">
+  <div class="title">비밀번호 재설정</div>
+  <div class="sub-title">가입하신 이메일 주소를 입력해주시면 비밀번호 재설정 메일을 발송해 드립니다.</div>
+  <!-- <p>*</p> -->
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }, id: '#reset-form') do |f| %>
 
-  <div class="form-inputs">
-    <%= f.input :email, required: true, autofocus: true %>
-  </div>
+    <div class="inputs">
+      <%= f.input :email, required: true, autofocus: true, placeholder: 'you@domain.com', label: false %>
+      <% unless resource.errors.empty? %>
+        <div class="email-error">이메일을 찾을수 없습니다.</div>
+      <% end %>
+      <!-- < flash.each do |key, value| %>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Send me reset password instructions" %>
-  </div>
-<% end %>
+      < end %> -->
+      <!-- <div class="email-error"></div> -->
+    </div>
 
-<%= render "users/shared/links" %>
+    <div class="actions">
+      <%= f.button :submit, "비밀번호 재설정", class: 'submit' %>
+    </div>
+  <% end %>
+
+</div>
+
+<script type="text/javascript">
+  var RegexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/i; //이메일 요휴성검사
+  var RegexPw = /^[a-zA-Z0-9._-]{4,30}$/;
+
+  $('.submit-regist-btn').on('click', function(event) {
+      if ( !RegexEmail.test($.trim($(".inputs input[email]").val())) ) { 
+        $(".modal-regist .regist-email").focus();
+        return false;
+      }
+    });
+</script>

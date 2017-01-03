@@ -2,7 +2,7 @@
   <div class="container">
     <%= render 'project/form' %>
     <div class="project-upload">
-      <%= form_tag create_project_image_path, method: 'post', class: 'dropzone', id: 'upload-dropzone', remote: true, authenticity_token: true do %>
+      <%= form_tag create_project_image_path, method: 'post', id: 'upload-dropzone', remote: true, authenticity_token: true do %>
 
         <div id="upload">
           <%= image_tag asset_path('project/image_upload.png'), class: 'dz-thumbnail dz-image' %>
@@ -30,7 +30,7 @@
       <input name="image_id" id="image_id" type="" value="">
     </form>
   </div>
-
+<!-- <= javascript_include_tag 'project_show'%> -->
 <script type="text/javascript">
   function hrefPost(url, param) {
     $('#hrefPost #image_id').attr('value', param);
@@ -58,6 +58,10 @@
 
       }
     });
+  });
+
+  $('.action-icon .project-cancel').on('click', function(e) {
+    window.history.back();
   });
 
   $(".overlay").on('click', function(event) {

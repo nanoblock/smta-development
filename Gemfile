@@ -1,15 +1,9 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.2.6'
-gem 'pg', '~> 0.15'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.1.0'
-gem 'jquery-rails'
-gem 'turbolinks'
-gem 'jbuilder', '~> 2.0'
 
-# gem 'sprockets'
+#database
+gem 'pg', '~> 0.15'
 
 #image
 gem 'rmagick', require: 'RMagick'
@@ -20,7 +14,7 @@ gem 'bootstrap-sass'
 gem 'jquery-ui-rails'
 gem 'dropzonejs-rails'
 gem 'browser'
-gem 'high_voltage'
+# gem 'high_voltage'
 
 #author
 gem 'devise'
@@ -38,3 +32,16 @@ gem 'kaminari'
 
 #search
 gem 'ransack'
+
+#javascript
+gem 'gon'
+gem 'sass-rails', '~> 5.0'
+gem 'uglifier', '>= 1.3.0'
+gem 'jquery-rails'
+gem 'turbolinks'
+gem 'sprockets'
+
+#thread
+gem 'delayed_job_active_record'
+gem 'daemons'
+# bundle exec ./bin/delayed_job $1 start

@@ -37,12 +37,12 @@ class ProfileController < ApplicationController
   def set_profile
     @profile = current_user.profile
     if @profile.nil?
-      @profile = Profile.new
-      @profile.app_name = "어플 이름"
-      @profile.desc = "수정 버튼을 눌러 어플에 대한 정보를 입력하세요."
-      @profile.tel = "전화번호"
-      @profile.app_email = "이메일"
-      current_user.profile = @profile
+      @profile              = Profile.new
+      @profile.app_name     = "어플 이름"
+      @profile.desc         = "수정 버튼을 눌러 어플에 대한 정보를 입력하세요."
+      @profile.tel          = "전화번호"
+      @profile.app_email    = "이메일"
+      current_user.profile  = @profile
       @profile.save!
     end
     return @profile

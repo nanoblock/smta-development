@@ -5,7 +5,7 @@
     <%= render 'project/form' %>
 
     <div class="project-upload">
-      <%= form_tag create_image_path, method: 'post', class: 'dropzone', id: 'upload-dropzone', remote: true, authenticity_token: true do %>
+      <%= form_tag create_image_path, method: 'post', id: 'upload-dropzone', remote: true, authenticity_token: true do %>
         
         <input name="project_name" id="project_name" type="hidden" value="">
         <input name="project_id" id="project_id" type="hidden" value="">
@@ -67,8 +67,8 @@
                 $('.dropzone #project_name').attr('value', result.name);
                 $('.dropzone #project_id').attr('value', result.id);
 
-                if (headlineDropzone.getQueuedFiles().length > 0) {
-                  headlineDropzone.processQueue();
+                if (myDropZone.getQueuedFiles().length > 0) {
+                  myDropZone.processQueue();
                 } else {
                   hrefPost("/project/"+$('.project-name-form textarea').val(), 'get', '', result.name, result.id);
                 }
@@ -90,83 +90,92 @@
   }
 
   $('.action-icon .project-submit').on('click', function(e) {
+    if (myDropZone.getQueuedFiles().length === 0) {
+      alert('이미지를 업로드 해 주세요.');
+      console.log("fdsafdsafdsafsdafdsafdsdsafds");
+      return false;
+    }
     createProject($('.project-name-form textarea').val(), $('.project-desc-form textarea').val());
+  });
+
+  $('.action-icon .project-cancel').on('click', function(e) {
+    window.history.back();
   });
 
   Dropzone.autoDiscover = false;
 
-  var headlineDropzone = new Dropzone("#upload-dropzone", {
+  var myDropZone = new Dropzone("#upload-dropzone", {
+    url: "<%= create_image_path %>",
+    paramName: 'image[photo]',
+    maxFiles: 100,
+    addRemoveLinks: false,
+    thumbnailWidth: 139,
+    thumbnailHeight: 255,
+    parallelUploads: 100,
+    clickable: '#upload',
+    previewContainer: '#preview',
+    autoProcessQueue: false,
+    previewTemplate: "\<div class=\"dz-preview dz-file-preview\">\n\
+    <div class=\"dz-remove\">삭제</div>\n\
+    <div class=\"overlay\"><span>이미지 연결</span></div>\n\
+    <img class=\"dz-thumbnail\" data-dz-thumbnail>\n\
+    <div class=\"dz-filename file-name\"><span data-dz-name></span></div>\n\
+      </div>\n\
+      ",
+    renameFilename: function (file) {
+      return file.renameFilename = file.split('.')[0];
+    },
+    acceptedFiles:'.jpg, .png, .jpeg, .gif',
 
-  paramName: 'image[photo]',
-  maxFiles: 100,
-  addRemoveLinks: false,
-  thumbnailWidth: 139,
-  thumbnailHeight: 255,
-  parallelUploads: 100,
-  clickable: '#upload',
-  previewContainer: '#preview',
-  autoProcessQueue: false,
-  previewTemplate: "\<div class=\"dz-preview dz-file-preview\">\n\
-  <div class=\"dz-remove\">삭제</div>\n\
-  <div class=\"overlay\"><span>이미지 연결</span></div>\n\
-  <img class=\"dz-thumbnail\" data-dz-thumbnail>\n\
-  <div class=\"dz-filename file-name\"><span data-dz-name></span></div>\n\
-    </div>\n\
-    ",
-  renameFilename: function (file) {
-    return file.renameFilename = file.split('.')[0];
-  },
-  acceptedFiles:'.jpg, .png, .jpeg, .gif',
+    init: function(){
+      $(this.element).addClass("dropzone");
 
-  init: function(){
+      this.on('dragenter', function(event) {
 
-    this.on('dragenter', function(event) {
-
-    });
-
-    this.on('dragleave', function(event) {
-
-    });
-
-    this.on('success', function(data, status, xhr) {
-      result = $.parseJSON(data.xhr.responseText);
-      $(data.previewTemplate).attr('id', result.image.id);
-    });
-    var clickedTemplate;
-    this.on("addedfile", function(file) {
-
-      $(file.previewTemplate).find('.overlay').on('click', function(event) {
-        saveMode = "fileClick";
-        clickedTemplate = file.previewTemplate;
-        createProject($('.project-name-form textarea').val(), $('.project-desc-form textarea').val());
       });
 
-      $(file.previewTemplate).find('.dz-remove').on('click', function(event) {
-        clickedValue = $(file.previewElement);
-        $(file.previewElement).fadeOut(300, function(e) {
-          file.previewElement.parentNode.removeChild(file.previewElement);
+      this.on('dragleave', function(event) {
+
+      });
+
+      this.on('success', function(data, status, xhr) {
+        result = $.parseJSON(data.xhr.responseText);
+        $(data.previewTemplate).attr('id', result.image.id);
+      });
+      var clickedTemplate;
+      this.on("addedfile", function(file) {
+
+        $(file.previewTemplate).find('.overlay').on('click', function(event) {
+          saveMode = "fileClick";
+          clickedTemplate = file.previewTemplate;
+          createProject($('.project-name-form textarea').val(), $('.project-desc-form textarea').val());
         });
+
+        $(file.previewTemplate).find('.dz-remove').on('click', function(event) {
+          clickedValue = $(file.previewElement);
+          $(file.previewElement).fadeOut(300, function(e) {
+            file.previewElement.parentNode.removeChild(file.previewElement);
+          });
+        });
+
       });
 
-    });
+      this.on('complete', function(file, json) {
+        
+      });
 
-    this.on('complete', function(file, json) {
-      
-    });
+      this.on('queuecomplete', function(file) {      
+        if (this.getQueuedFiles().length === 0) {
+          name = $('.project-name-form textarea').val();
+          id = $('.dropzone #project_id').attr('value');
 
-    this.on('queuecomplete', function(file) {      
-      if (this.getQueuedFiles().length === 0) {
-        name = $('.project-name-form textarea').val();
-        id = $('.dropzone #project_id').attr('value');
-
-        if (saveMode == 'fileClick') {
-          hrefPost("/project/"+ name +"/relation", 'post', $(clickedTemplate).attr('id'), $('.dropzone #project_name').attr('value'), $('.dropzone #project_id').attr('value'));
-        } else {
-          hrefPost("/project/"+$('.project-name-form textarea').val(), 'get', '', name, id);
+          if (saveMode == 'fileClick') {
+            hrefPost("/project/"+ name +"/relation", 'post', $(clickedTemplate).attr('id'), $('.dropzone #project_name').attr('value'), $('.dropzone #project_id').attr('value'));
+          } else {
+            hrefPost("/project/"+$('.project-name-form textarea').val(), 'get', '', name, id);
+          }
         }
-      }
-    });
-  },
-
-});
+      });
+    }
+  });
 </script>

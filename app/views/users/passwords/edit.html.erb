@@ -1,19 +1,56 @@
-<h2>Change your password</h2>
+<div class="edit-pw">
+  <div class="title">비밀번호 변경</div>
+  <div class="sub-title">변경하실 비밀번호를 입력해 주세요.</div>
 
-<%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
+  <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, id: 'edit-form' }) do |f| %>
+    <!-- <= f.error_notification %> -->
+    <%= f.input :reset_password_token, as: :hidden %>
+    <!-- <= f.full_error :reset_password_token %> -->
+    <div class="edit-pw-error"></div>
+    <div class="inputs">
+      <%= f.input :password, label: false, required: true, autofocus: true, placeholder: '비밀번호 입력' %>
+      <%= f.input :password_confirmation, label: false, required: true, placeholder: '비밀번호 확인' %>
+    </div>
 
-  <%= f.input :reset_password_token, as: :hidden %>
-  <%= f.full_error :reset_password_token %>
+    <div class="actions">
+      <%= f.button :submit, "비밀번호 변경", class: 'submit' %>
+    </div>
+  <% end %>
 
-  <div class="form-inputs">
-    <%= f.input :password, label: "New password", required: true, autofocus: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, label: "Confirm your new password", required: true %>
-  </div>
+</div>
 
-  <div class="form-actions">
-    <%= f.button :submit, "Change my password" %>
-  </div>
-<% end %>
+<script type="text/javascript">
 
-<%= render "users/shared/links" %>
+  $(document).ready(function() { 
+    $('.submit').on('click', function(event) {
+      var password = $('.edit-pw .inputs #user_password');
+      var password_confirmation = $(".edit-pw .inputs #user_password_confirmation");
+
+      if ( !isValidPassword(password.val()) ) { 
+        console.log(password.val());
+        defaultInputValue(password, password_confirmation);
+
+        $('.edit-pw-error').fadeIn(300).text('비밀번호는 4글자 이상, 숫자를 포함해야합니다.');
+        return false;
+      } else if( password.val().trim() != password_confirmation.val().trim() ) {
+        defaultInputValue(password, password_confirmation);
+        $('.edit-pw-error').fadeIn(300).text('비밀번호와 비밀번호확인이 일치하지 않습니다.');
+
+        return false;
+      }
+
+    });
+  });
+
+  function defaultInputValue(pw, pw_cfm) {
+    pw.val('');
+    pw_cfm.val('');
+    pw.focus();
+  }
+
+  function isValidPassword(password) {
+    var regexPw = /^(?=.*[a-z])(?=.*[0-9]).{4,30}$/;
+    return regexPw.test($.trim(password));
+  }
+  
+</script>

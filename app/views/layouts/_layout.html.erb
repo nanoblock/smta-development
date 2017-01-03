@@ -1,5 +1,6 @@
 <%= render 'shared/usermodal' %>
 <%= render 'shared/header'%>
+
 <%= yield %>
 
 <%case controller.action_name
@@ -9,8 +10,10 @@
     <%= render 'shared/footer' %>
   <%end%>
 
-<% unless controller.action_name == "relation" %>
-  
+<% case controller.controller_name 
+  when "profile" %>
+  <%= javascript_include_tag 'profile', 'data-turbolinks-track' => true %>
+  <% else %>
 <% end %>
 
-<%= javascript_include_tag 'usermodal' %>
+<%= javascript_include_tag 'usermodal', 'data-turbolinks-track' => true %>

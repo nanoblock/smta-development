@@ -40,6 +40,7 @@ class ProjectController < ApplicationController
 
   def show
     @images = @project.images.all
+    gon.param = params[:project_name]
   end
 
   def relation

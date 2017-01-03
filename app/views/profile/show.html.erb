@@ -51,6 +51,14 @@
 
     </div>
 
+    <% if @search_projects.size <= 4 and @search_projects.size != 0 %>
+      <div class="pagination">
+        <%= image_tag(asset_path('profile/pagination_prev.svg'), class: 'pagination-prev') %>
+          <div class="pagination-num"><div class="text current">1</div></div>
+        <%= image_tag(asset_path('profile/pagination_next.svg'), class: 'pagination-next next') %>
+      </div>
+    <% end %>
+
     <% case params[:page] 
       when "1", nil, @last_page.to_s %>
         <%= paginate @projects, window: 4 %>
@@ -60,101 +68,5 @@
         <%= paginate @projects, window: 2 %>
     <% end %>
 
+  </div>
 </div>
-</div>
-<script>
-  $('.content').css('top',$('.info').height()+20+"px");
-
-  deleteTargetImg($(document).width());
-  
-  $(window).resize(function(e) {
-    deleteTargetImg($(this).width());
-  });
-
-  $('.action-icon #edit').on('click', function(e) {
-    showEditInfo($(document).width());
-  });
-
-  $('.action-icon .cancel').on('click', function(e) {
-    showInfo($(document).width());
-  });
-
-  $('.action-icon .submit').on('click', function(e) {
-    param_app_name = $('.edit-name-form input').val();
-    param_desc = $('.edit-desc-form textarea').val();
-    param_tel = $('.edit-tel-form input').val();
-    param_app_email = $('.edit-email-form input').val();
-
-    if (!isNullOrUndefined(param_app_name) && !isNullOrUndefined(param_desc) && !isNullOrUndefined(param_tel) && !isNullOrUndefined(param_app_email)){
-
-      $.ajax({
-        type: "PUT",
-        url: "<%= profile_path %>",
-        data: { profile: { 
-          app_name: param_app_name, 
-          desc: param_desc, 
-          tel: param_tel, 
-          app_email: param_app_email}
-        },
-        success: function(data) {
-          if($('.edit-info').css('display') != 'none') {
-            showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc);
-          }
-        },
-        error: function(data) {
-
-        }
-      });
-    } else {
-      showInfo($(document).width());
-    }
-
-  });
-
-  function deleteTargetImg(width) {
-    if (width <= 767) {
-      $('.delete-target-img').each(function(index, value) {
-        $(value).css('display', 'none');
-      });
-    } else {
-      $('.delete-target-img').each(function(index, value) {
-        $(value).css('display', 'inline-block');
-      });
-    }
-  }
-
-  function showInfo(width, app_name, tel, app_email, desc) {
-    if (width > 1200) {
-      $('.content-0').css('margin-top', '100px');
-      $('.content-3').css('transform', 'translateY(-73%)');
-    } else if(width >= 787 ) {
-      $('.content-0').css('margin-top', '100px');
-    } else if(width >= 320) {
-      $('.content').css('top',$('.info').height()+20+"px");
-    }
-
-    if(!isNullOrUndefined(app_name) && !isNullOrUndefined(tel) && !isNullOrUndefined(app_email) && !isNullOrUndefined(desc)) {
-      $('.user-profile .text').text(app_name);
-      $('.action-icon a').attr('href', "tel:"+tel)
-      $('.user-profile .sub-text').text(desc);
-    }
-
-    $('.edit-info').fadeOut(300).css('display', 'none');
-    $('.info').fadeIn(300).css('display', 'block');
-  }
-
-  function showEditInfo(width) {
-    if (width > 1200) {
-      $('.content-0').css('margin-top', '197px');
-      $('.content-3').css('transform', 'translateY(-47%)');
-    } else if(width >= 787 ) {
-      $('.content-0').css('margin-top', '186px');
-    } else if(width >= 320) {
-      $('.content').css('top', '360px');
-    }
-    $('.info').fadeOut(300).css('display', 'none');
-    $('.edit-info').fadeIn(300).css('display', 'block');
-  }
-
-  function isNullOrUndefined(variable) { return variable === null || variable === undefined; }
-</script>

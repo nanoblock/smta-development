@@ -18,9 +18,7 @@ class ApplicationController < ActionController::Base
     @search_projects = @search.result.order('created_at DESC').page(params[:page]).per(6)
     search_users = Array.new
     @result = Hash.new
-    puts "!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@"
-    p @search_projects.size
-    puts "!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@!@"
+    
     unless @search_projects.nil?
       @search_projects.each do |projects|
         search_users << User.find(projects.user_id)
@@ -30,7 +28,7 @@ class ApplicationController < ActionController::Base
     @result = {project: @search_projects, user: search_users}
 
     @last_page = pagining(@search_projects.size)
-    
+    gon.projects = @result
   end
 
   private
@@ -52,5 +50,7 @@ class ApplicationController < ActionController::Base
     
     @last_page
   end
+
+
 
 end

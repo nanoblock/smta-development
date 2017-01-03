@@ -36,7 +36,8 @@
                 <div class="email-check-form">
                   <%= f.check_box :email_check, checked: true %>
                   <label><span></span>이메일 수신 동의</label>
-                  이용약관
+                  <%= link_to '이용약관', page_term_path, class: 'link-term' %> | 
+                  <%= link_to '개인정보처리방침', page_privacy_path, class: 'link-privacy' %>
                 </div>
                 <div class="email-check-text">
                   - 동의를 하시면 댜양한 쇼미더앱스의 안내를 받아보실 수 있습니다.
@@ -61,9 +62,10 @@
               </div>
               <div class="pw-form-error"></div>
               <div class="autologin-check-form">
-                <%= f.check_box :remember_me, checked: false, label: false, as: :boolean if devise_mapping.rememberable? %>
+                <%= f.check_box :remember_me, checked: true, label: false, as: :boolean if devise_mapping.rememberable? %>
                 <label><span></span>자동 로그인</label>
-                비밀번호 변경
+                <%= link_to '비밀번호 변경', new_user_password_path, class: 'link-privacy' %>
+                
               </div>
             </div>
             <%= f.button :submit, "확인", class: 'submit-login-btn' %>
@@ -81,6 +83,3 @@
     </div>
     
 </div>
-<script type="text/javascript">
-    
-</script>

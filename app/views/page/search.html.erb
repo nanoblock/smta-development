@@ -2,11 +2,11 @@
   <div class="container">
 
     <div class="search-container row">
-      
+
           <% @result[:project].each_with_index do |result, index| %>
             <div class="col-md-4 col-lg-3">
               <div class="search-content">
-                <!-- <= sort_link(@search, :users_count) %> -->
+
                 <div class="search-header">
                   <%= image_tag asset_path(@result[:user].at(index).profile.avatar.url), class: 'user-icon' %>
                   <div class="title">
@@ -44,6 +44,15 @@
             </div>
           <% end %>
         </div>
+
+    <% if @search_projects.size <= 6 @search_projects.size != 0 %>
+      <div class="pagination">
+        <%= image_tag(asset_path('profile/pagination_prev.svg'), class: 'pagination-prev') %>
+          <div class="pagination-num"><div class="text current">1</div></div>
+        <%= image_tag(asset_path('profile/pagination_next.svg'), class: 'pagination-next next') %>
+      </div>
+    <% end %>
+
     <% case params[:page] 
         when "1", nil, @last_page.to_s %>
           <%= paginate @search_projects, window: 4 %>
@@ -54,7 +63,3 @@
         <% end %>
   </div>
 </div>
-
-<script type="text/javascript">
-  console.log($('.project-tag').text());
-</script>

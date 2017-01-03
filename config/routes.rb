@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   registrations: 'users/registrations',
   sessions: 'users/sessions',
   # unlocks: 'users/unlocks',
-  }, skip: [:sessions]
+  }, skip: [:sessions, :passwords]
 
   # devise_for :users
 
@@ -14,6 +14,13 @@ Rails.application.routes.draw do
     post 'login' => 'users/sessions#create', as: :user_session
     delete 'logout' => 'users/sessions#destroy', as: :destroy_user_session
     get 'sign_up' => 'users/registrations#new'
+    get 'users/password/reset' => 'users/passwords#new', as: :new_user_password
+    post 'users/password/reset' => 'users/passwords#create', as: :user_password
+    get 'users/psasword/reset/edit' => 'users/passwords#edit', as: :edit_user_password
+    put 'users/password/reset' => 'users/passwords#update'
+    patch 'users/password/reset' => 'users/passwords#update'
+    get 'users/password/reset/done' => 'users/passwords#done', as: :done_user_password
+    # post 'validation' => 'users/sessions#login_validataion', as: :user_login_validataion
   end
 
   as :profile do
@@ -55,6 +62,8 @@ Rails.application.routes.draw do
   get 'term' => 'page#term', as: :page_term
   get 'home' => 'page#search'
   post 'home' => 'page#search', as: :project_search
+  
+  get 'test' => 'page#test'
 
   root 'page#landing'
 end

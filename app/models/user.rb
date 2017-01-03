@@ -7,4 +7,12 @@ class User < ActiveRecord::Base
   
   has_one :profile, dependent: :destroy  
   has_many :projects, dependent: :destroy
+
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_now
+  end
+
+  def after_password_reset
+    self.clear_reset_password_token unless self.reset_password_token.nil? and self.reset_password_sent_at.nil?
+  end
 end

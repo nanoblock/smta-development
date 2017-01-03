@@ -4,7 +4,6 @@
     } else {
       $("#mySidenav").css('width', '470px');
     }
-    
   }
 
   function closeNav() {

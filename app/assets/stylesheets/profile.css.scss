@@ -752,8 +752,14 @@
             display: inline-block;
             letter-spacing: 0.4px;
             color: #000000;
+            max-width: 100%;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
           .action-icon {
+            position: absolute;
             .icon {
               width: 19px;
               height: 19px;
@@ -766,6 +772,13 @@
             line-height: 1.3;
             letter-spacing: 0.2px;
             color: #000000;
+            word-wrap : break-word;
+            overflow-wrap : break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
           }
         }
       }  /*info*/
@@ -937,7 +950,8 @@
       .pagination-num {
         text-align: center;
         background-color: #D8D8D8;
-        a {
+        a,
+        .text {
           width: 100%;
           margin-top: 15px;
           color: #ffffff;
