@@ -7,7 +7,7 @@
             <div class="col-md-4 col-lg-3">
               <div class="search-content">
 
-                <div class="search-header">
+                <div class="search-header" id="<%= result.id %>" name="<%= result.name %>">
                   <%= image_tag asset_path(@result[:user].at(index).profile.avatar.url), class: 'user-icon' %>
                   <div class="title">
                     <div class="app-name">
@@ -24,17 +24,16 @@
                     <%= image_tag asset_path('header/download.svg'), class: 'download' %>
                   </div>
 
-                  <%= image_tag asset_path(result.images.first.photo.url), class: 'project-img'%>
+                  <%= image_tag(asset_path(result.images.first.photo.url), class: 'project-img') %>
                   
                   <div class="project-desc"><%= result.desc %></div>
-
                   <div class="project-tag">
                     <div class="search-tag">
                       <% if !params[:q].nil? && !params[:q][:name_cont].empty? %>
                         #<%= params[:q][:name_cont] %> &nbsp
                       <% end %>
                     </div>
-                     #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag 
+                     <!-- #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag #tagtag  -->
                   </div>
 
                 </div>
@@ -45,7 +44,7 @@
           <% end %>
         </div>
 
-    <% if @search_projects.size <= 6 @search_projects.size != 0 %>
+    <% if @search_projects.size <= 6 and @search_projects.size != 0 %>
       <div class="pagination">
         <%= image_tag(asset_path('profile/pagination_prev.svg'), class: 'pagination-prev') %>
           <div class="pagination-num"><div class="text current">1</div></div>
@@ -62,4 +61,22 @@
           <%= paginate @search_projects, window: 2 %>
         <% end %>
   </div>
+    <form id="hrefPost">
+      <!-- <= hidden_field_tag :authenticity_token, form_authenticity_token %> -->
+      <input name="project_id" id="project_id" type="hidden" value="">
+      <input name="project_name" id="project_name" type="hidden" value="">
+    </form>
 </div>
+
+<script type="text/javascript">
+
+  $('.search-header').on('click', function(e) {
+    renderPreview('/project/'+ $(this).attr('name') +'/preview', $(this).attr('id'), $(this).attr('name'));
+  });
+
+  function renderPreview(url, project_id, project_name) {
+    $('#hrefPost').find('#project_id').val(project_id);
+    $('#hrefPost').find('#project_name').val(project_name);
+    $('#hrefPost').attr({action: url, method: 'get'}).submit();
+  }
+</script>

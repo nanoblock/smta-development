@@ -44,4 +44,7 @@ gem 'sprockets'
 #thread
 gem 'delayed_job_active_record'
 gem 'daemons'
+
+#progress
+gem 'nprogress-rails'
 # bundle exec ./bin/delayed_job $1 start

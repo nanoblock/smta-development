@@ -12,8 +12,17 @@
 
 <% case controller.controller_name 
   when "profile" %>
+
   <%= javascript_include_tag 'profile', 'data-turbolinks-track' => true %>
+
+  <% when "passwords"%>
+    <% case controller.action_name 
+      when "new" %>
+        <%= javascript_include_tag 'passwordnew', 'data-turbolinks-track' => true %>
+      <% when "edit" %>
+        <%= javascript_include_tag 'passwordedit', 'data-turbolinks-track' => true %>
+    <% end %>
   <% else %>
 <% end %>
 
-<%= javascript_include_tag 'usermodal', 'data-turbolinks-track' => true %>
+<%= javascript_include_tag 'usermodal', 'data-turbolinks-track' => false %>

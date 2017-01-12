@@ -5,11 +5,15 @@
   <%= simple_form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put, id: 'edit-form' }) do |f| %>
     <!-- <= f.error_notification %> -->
     <%= f.input :reset_password_token, as: :hidden %>
-    <!-- <= f.full_error :reset_password_token %> -->
+
     <div class="edit-pw-error"></div>
     <div class="inputs">
       <%= f.input :password, label: false, required: true, autofocus: true, placeholder: '비밀번호 입력' %>
       <%= f.input :password_confirmation, label: false, required: true, placeholder: '비밀번호 확인' %>
+
+      <% unless resource.errors.empty? %>
+        <div class="not-found-error">재설정 요청 기간이 끝났거나 토큰이 올바르지 않습니다.</div>
+      <% end %>
     </div>
 
     <div class="actions">
@@ -18,39 +22,3 @@
   <% end %>
 
 </div>
-
-<script type="text/javascript">
-
-  $(document).ready(function() { 
-    $('.submit').on('click', function(event) {
-      var password = $('.edit-pw .inputs #user_password');
-      var password_confirmation = $(".edit-pw .inputs #user_password_confirmation");
-
-      if ( !isValidPassword(password.val()) ) { 
-        console.log(password.val());
-        defaultInputValue(password, password_confirmation);
-
-        $('.edit-pw-error').fadeIn(300).text('비밀번호는 4글자 이상, 숫자를 포함해야합니다.');
-        return false;
-      } else if( password.val().trim() != password_confirmation.val().trim() ) {
-        defaultInputValue(password, password_confirmation);
-        $('.edit-pw-error').fadeIn(300).text('비밀번호와 비밀번호확인이 일치하지 않습니다.');
-
-        return false;
-      }
-
-    });
-  });
-
-  function defaultInputValue(pw, pw_cfm) {
-    pw.val('');
-    pw_cfm.val('');
-    pw.focus();
-  }
-
-  function isValidPassword(password) {
-    var regexPw = /^(?=.*[a-z])(?=.*[0-9]).{4,30}$/;
-    return regexPw.test($.trim(password));
-  }
-  
-</script>

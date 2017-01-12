@@ -28,7 +28,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # def valid_reset_token
   #   if User.find_by_reset_password_token params[:reset_password_token].nil?
-      
+
   #   end
   # end
 
@@ -50,8 +50,9 @@ class Users::PasswordsController < Devise::PasswordsController
       respond_with resource, location: after_resetting_password_path_for(resource)
     else
       set_minimum_password_length
-      session[:return_to] ||= request.referer
-      redirect_to session.delete(:return_to)
+      render :edit
+      # session[:return_to] ||= request.referer
+      # redirect_to session.delete(:return_to)
       # render :edit
     end
     

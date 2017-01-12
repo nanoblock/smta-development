@@ -92,7 +92,6 @@
   $('.action-icon .project-submit').on('click', function(e) {
     if (myDropZone.getQueuedFiles().length === 0) {
       alert('이미지를 업로드 해 주세요.');
-      console.log("fdsafdsafdsafsdafdsafdsdsafds");
       return false;
     }
     createProject($('.project-name-form textarea').val(), $('.project-desc-form textarea').val());

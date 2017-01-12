@@ -8,15 +8,15 @@
           <%= image_tag asset_path(@profile.avatar.url), class: 'user-icon' %>
           <div class="user-profile">
             <div class="text">
-                <%= @profile.app_name %>
+                <!-- <= @profile.app_name %> -->
             </div>
             <div class="action-icon">
-              <%= link_to image_tag(asset_path('profile/call.svg'), class: 'icon'), "tel:"+@profile.tel %>
-              <%= mail_to @profile.app_email, image_tag(asset_path('profile/mail.svg'), class: 'icon') %>
+              <%= link_to image_tag(asset_path('profile/call.svg'), class: 'icon tel'), "" %>
+              <%= mail_to "", image_tag(asset_path('profile/mail.svg'), class: 'icon mail') %>
               <%= image_tag asset_path('profile/edit.svg'), class: 'icon', id: 'edit' %>
             </div>
             <div class="sub-text">
-              <%= @profile.desc %>
+              <!-- <= @profile.desc %> -->
             </div>
           </div>
         </div>
@@ -70,3 +70,10 @@
 
   </div>
 </div>
+
+<script type="text/javascript">
+  $('.user-profile .text').text(gon.app_name);
+  $('.user-profile .icon').attr('href', "tel: "+gon.tel);
+  $('.user-profile .icon.mail').attr("href", "mailto:"+gon.app_email);
+  $('.user-profile .sub-text').text(gon.desc);
+</script>

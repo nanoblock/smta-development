@@ -34,12 +34,12 @@ class Users::SessionsController < Devise::SessionsController
   protected
   def invalid_login_email
     set_flash_message(:alert, :invalid_email)
-    render nothing: true, json: flash[:alert], status: 401
+    render json: flash[:alert], status: 401
   end
 
   def invalid_login_attempt
     set_flash_message(:alert, :invalid)
-    render nothing: true, json: flash[:alert], status: 401
+    render json: flash[:alert], status: 401
   end
 
 end

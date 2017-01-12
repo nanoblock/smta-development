@@ -21,14 +21,31 @@
     showInfo($(document).width());
   });
 
+  function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.readAsDataURL(input.files[0]);
+        reader.onload = function (e) {
+          $('.edit-info .icon').attr('src', e.target.result);
+          $(input).attr('src', e.target.result);
+        }
+    }
+  }
+  
+  $(".edit-info #profile_avatar").change(function(e){
+      readURL(this);
+  });
+
   $('.action-icon .submit').on('click', function(e) {
     param_app_name = $('.edit-name-form input').val();
     param_desc = $('.edit-desc-form textarea').val();
     param_tel = $('.edit-tel-form input').val();
     param_app_email = $('.edit-email-form input').val();
+    param_avatar = $('.edit-info #profile_avatar').attr('src');
 
-    if (!isNullOrUndefined(param_app_name) && !isNullOrUndefined(param_desc) && !isNullOrUndefined(param_tel) && !isNullOrUndefined(param_app_email)){
+    if ( !isNullOrUndefined(param_app_name) && !isNullOrUndefined(param_desc) && !isNullOrUndefined(param_tel) && !isNullOrUndefined(param_app_email) && !isNullOrUndefined(param_avatar) ){
 
+    
       $.ajax({
         type: "PUT",
         url: "<%= profile_path %>",
@@ -36,11 +53,12 @@
           app_name: param_app_name, 
           desc: param_desc, 
           tel: param_tel, 
-          app_email: param_app_email}
+          app_email: param_app_email,
+          avatar: param_avatar}
         },
         success: function(data) {
           if($('.edit-info').css('display') != 'none') {
-            showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc);
+            showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc, param_avatar);
           }
         },
         error: function(data) {
@@ -65,7 +83,7 @@
     }
   }
 
-  function showInfo(width, app_name, tel, app_email, desc) {
+  function showInfo(width, app_name, tel, app_email, desc, avatar) {
     if (width > 1200) {
       $('.content-0').css('margin-top', '100px');
       $('.content-3').css('transform', 'translateY(-73%)');
@@ -74,11 +92,20 @@
     } else if(width >= 320) {
       $('.content').css('top',$('.info').height()+20+"px");
     }
-
-    if(!isNullOrUndefined(app_name) && !isNullOrUndefined(tel) && !isNullOrUndefined(app_email) && !isNullOrUndefined(desc)) {
+    if(!isNullOrUndefined(app_name)) {
       $('.user-profile .text').text(app_name);
-      $('.action-icon a').attr('href', "tel:"+tel)
+    }
+    if(!isNullOrUndefined(tel)) {
+      $('.action-icon .icon.tel').attr('href', "tel:"+tel);
+    }
+    if(!isNullOrUndefined(app_email)) {
+      $('.action-icon .icon.mail').attr("href", "mailto:"+app_email);
+    }
+    if(!isNullOrUndefined(desc)) {
       $('.user-profile .sub-text').text(desc);
+    }
+    if(!isNullOrUndefined(avatar)) {
+      $('.user-icon').attr('src', avatar);
     }
 
     $('.edit-info').fadeOut(300).css('display', 'none');

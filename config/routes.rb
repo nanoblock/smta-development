@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :user, controllers: {  
-  # confirmations: 'users/confirmations',
+  confirmations: 'users/confirmations',
   passwords: 'users/passwords',
   registrations: 'users/registrations',
   sessions: 'users/sessions',
@@ -62,7 +62,7 @@ Rails.application.routes.draw do
   get 'term' => 'page#term', as: :page_term
   get 'home' => 'page#search'
   post 'home' => 'page#search', as: :project_search
-  
+
   get 'test' => 'page#test'
 
   root 'page#landing'

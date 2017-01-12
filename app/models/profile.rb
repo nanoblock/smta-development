@@ -10,7 +10,11 @@ class Profile < ActiveRecord::Base
   path: ":rails_root/public/images/:id_sha1/:style.:extension",
   # public/images/:id_sha1/:style.:extension", #upload server image path,
   default_url: "profile/avatar_logo.svg",
-  url: "/images/:id_sha1/:style.:extension",
-  less_than: 3.megabytes
+  url: "/images/:id_sha1/:style.:extension"
+
+  validates_attachment :avatar, 
+    presence: true, 
+    content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] },
+    less_than: 3.megabytes
 
 end

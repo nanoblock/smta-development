@@ -1,8 +1,14 @@
 <%= simple_form_for @profile, url: create_profile_path, method: :post do |f| %>
   <div class="user-icon">
+     <!-- <= f.file_field :avatar, label: image_tag asset_path(@profile.avatar.url), class: 'avatar-form' %> -->
+    <!-- <= image_tag asset_path(@profile.avatar.url), class: 'icon' %> -->
+    <!-- <input type="file" class="avatar-form"> -->
+    
+    <%= f.input :avatar, as: :file, label: false %>
     <%= image_tag asset_path(@profile.avatar.url), class: 'icon' %>
     <div class="overlay"></div>
     <%= image_tag asset_path('profile/logo_overlay.svg'), class: 'overlay-icon' %>  
+
   </div>
 
   <div class="edit">

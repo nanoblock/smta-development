@@ -1,4 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :login_validataion, only: [:create]
 # before_action :configure_sign_up_params, only: [:create]
 # before_action :configure_account_update_params, only: [:update]
 
@@ -57,4 +58,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+  def login_validataion
+    resource = User.find_for_database_authentication(email: params[:user][:email])
+    return invalid_login_email if resource
+  end
+
+  protected
+  def invalid_login_email
+    set_flash_message(:alert, :invalid_email)
+    render nothing: true, json: flash[:alert], status: 401
+  end
 end

@@ -34,7 +34,15 @@
     <% end %>
 
   </div>
-  <div class="preview-name"><%= link_to @project.name, show_project_path(@project.name) %></div>
+  <div class="preview-name">
+    <% if @project_manager %>
+      <%= link_to @project.name, show_project_path(@project.name) %>
+    <% else %>
+      <%= @project.name %>
+      <!-- <= link_to @project.name, project_search_path %> -->
+    <% end %>
+      
+    </div>
   <div class="preview-line"></div>
 
   <form id="hrefPost">
@@ -66,9 +74,10 @@
         id = $(value).attr('id');
       }
     });
-    if(clazz == "link-mode") {
+    if(clazz == "link-mode" && gon.project_manager) {
       hrefPost("/project/<%= params[:project_name] %>/relation", id);
-    } else if(clazz == "save-mode") {
+      
+    } else if(clazz == "save-mode" && gon.project_manager) {
       location.href = "<%= show_project_path(@project.name) %>";
     }
   });

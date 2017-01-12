@@ -120,6 +120,7 @@
     if(clazz == "save-mode") {
       gen_boxs = $('*[class^="gen_box_"]');
       saveClickableArea();
+      
       hrefPost("/project/<%= params[:project_name] %>/preview", id);
       // location.href = "<= show_project_path(@project.name) %>";
     } else if(clazz == "preview-mode") {

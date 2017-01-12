@@ -1,19 +1,27 @@
 @import "bootstrap";
 
 @media screen and (min-width: 320px) and (max-width: 767px) {
-
+.project-img {
+    height: 308px;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1023px) { 
-
+.project-img {
+    height: 308px;
+  }
 }
 
 @media screen and (min-width: 1024px) {
-
+  .project-img {
+    height: 100%;
+  }
 }
 
 @media screen and (min-width: 1440px) { 
-
+  .project-img {
+    height: 100%;
+  }
 }
 
 .search {
@@ -45,6 +53,9 @@
         .search-header {
           margin-left: 20px;
           margin-top: 18px;
+          &:hover {
+            cursor: pointer;
+          }
           .user-icon {
             float: left;
             width: 40px;
@@ -107,7 +118,7 @@
             width: 100%;
             margin-top: 12px;
             margin-left: -10px;
-            height: 308px;
+            /*height: 308px;*/
             object-fit: contain;
           }
           .project-desc {

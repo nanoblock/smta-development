@@ -55,7 +55,15 @@ class ProjectController < ApplicationController
   end
 
   def preview
+    @project_manager = gon.project_manager = project_manager? @project.id if params[:project_id].nil?
+    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    puts "project_manager -> #{@projec_manager}"
+    puts "gon.project_manager -> #{gon.project_manager}"
+    puts project_manager? @project.id
+    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
     @images = @project.images.all
+
     unless (params[:image_id]).nil?
       @image = Image.find(params[:image_id])
     else
@@ -79,12 +87,10 @@ class ProjectController < ApplicationController
 
   def find_by_project_name
     if !params[:project_id].nil?
-      return @project = current_user.projects.find(params[:project_id])
+      return @project = Project.find(params[:project_id])
     else
-      return @project = current_user.projects.find_by_name(params[:project_name])
+      return @project = Project.find_by_name(params[:project_name])
     end
-
-
     # if current_user.projects.where(name: params[:project_name]).length <= 1
       
     # else
@@ -96,6 +102,19 @@ class ProjectController < ApplicationController
     # else
     #   redirect_to root_path
     # end
+  end
+
+  def project_manager? project_id
+    # preview mode true   -> guest
+    # preview mode false  -> manager
+    return false if !user_signed_in?
+
+    current_project = Project.find(project_id)
+    current_user.projects.each do |projects|
+      return true if current_project == projects
+    end
+
+    return false
   end
 
 end
