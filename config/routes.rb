@@ -24,37 +24,38 @@ Rails.application.routes.draw do
   end
 
   as :profile do
-    get 'profile' => 'profile#show', as: :profile
-    post 'profile' => 'profile#create', as: :create_profile
-    put 'profile' => 'profile#update'
-    patch 'profile' => 'profile#update'
+    get 'profiles' => 'profile#show', as: :profile
+    post 'profiles' => 'profile#create', as: :create_profile
+    put 'profiles' => 'profile#update'
+    patch 'profiles' => 'profile#update'
   end
 
   as :project do
-    get 'project' => 'project#new', as: :new_project
-    get 'project/:project_name' => 'project#show', as: :show_project
-    post 'project/:project_name/relation' => 'project#relation', as: :image_relation_project
-    # get 'project/:project_name/relation' => 'project#relation'
-    post 'project' => 'project#create', as: :create_project
-    post 'project/:project_name/preview' => 'project#preview', as: :preview_project
-    post 'project/validate/:project_name' => 'project#project_validate', as: :validate_project_name
-    get 'project/:project_name/preview' => 'project#preview'
-    put 'project' => 'project#update', as: :project
-    patch 'project' => 'project#update'
+    get 'projects' => 'project#new', as: :new_project
+    get 'projects/:project_id' => 'project#show', as: :show_project
+    post 'projects/:project_id' => 'project#show'
+    post 'projects/:project_id/relation' => 'project#relation', as: :image_relation_project
+    # get 'project/:project_id/relation' => 'project#relation'
+    post 'projects' => 'project#create', as: :create_project
+    post 'projects/:project_id/preview' => 'project#preview', as: :preview_project
+    post 'projects/validate/:project_id' => 'project#project_validate', as: :validate_project_id
+    get 'projects/:project_id/preview' => 'project#preview'
+    put 'projects' => 'project#update', as: :project
+    patch 'projects' => 'project#update'
   end
 
   as :image do
-    post 'project/:project_name/image/' => 'image#create', as: :create_project_image
-    delete 'project/:project_name/image/:image_id' => 'image#destroy', as: :destroy_project_image
-    post 'project/:project_name/image/destroy_all' => 'image#destroy_all', as: :destroy_all_project_image
-    post 'project/image' => 'image#update', as: :create_image
-    put 'project/:project_name/image/' => 'image#update', as: :image
-    patch 'project/:project_name/image/' => 'image#update'
+    post 'projects/:project_id/images' => 'image#create', as: :create_project_image
+    delete 'projects/:project_id/images/:image_id' => 'image#destroy', as: :destroy_project_image
+    post 'projects/:project_id/images/destroy_all' => 'image#destroy_all', as: :destroy_all_project_image
+    post 'projects/images/create' => 'image#create', as: :create_image
+    put 'projects/:project_id/images' => 'image#update', as: :image
+    patch 'projects/:project_id/images' => 'image#update'
   end
 
   as :clickables do
-    post 'project/:project_name/images/:image_id/clickables' => 'clickable#create', as: :project_image_clickables
-    post 'project/:project_name/images/:image_id/clickables/destroy_all' => 'clickable#destroy_all', as: :destroy_all_project_image_clickables
+    post 'projects/:project_id/images/:image_id/clickables' => 'clickable#create', as: :project_image_clickables
+    post 'projects/:project_id/images/:image_id/clickables/destroy_all' => 'clickable#destroy_all', as: :destroy_all_project_image_clickables
   end
 
   get 'landing' => 'page#landing', as: :page_landing

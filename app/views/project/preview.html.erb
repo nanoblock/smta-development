@@ -36,7 +36,7 @@
   </div>
   <div class="preview-name">
     <% if @project_manager %>
-      <%= link_to @project.name, show_project_path(@project.name) %>
+      <%= link_to @project.name, show_project_path(@project.id) %>
     <% else %>
       <%= @project.name %>
       <!-- <= link_to @project.name, project_search_path %> -->
@@ -75,10 +75,10 @@
       }
     });
     if(clazz == "link-mode" && gon.project_manager) {
-      hrefPost("/project/<%= params[:project_name] %>/relation", id);
+      hrefPost("/projects/<%= params[:project_id] %>/relation", id);
       
     } else if(clazz == "save-mode" && gon.project_manager) {
-      location.href = "<%= show_project_path(@project.name) %>";
+      location.href = "<%= show_project_path(@project.id) %>";
     }
   });
 

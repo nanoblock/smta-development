@@ -62,7 +62,7 @@
         <% end %>
   </div>
     <form id="hrefPost">
-      <!-- <= hidden_field_tag :authenticity_token, form_authenticity_token %> -->
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
       <input name="project_id" id="project_id" type="hidden" value="">
       <input name="project_name" id="project_name" type="hidden" value="">
     </form>
@@ -71,12 +71,12 @@
 <script type="text/javascript">
 
   $('.search-header').on('click', function(e) {
-    renderPreview('/project/'+ $(this).attr('name') +'/preview', $(this).attr('id'), $(this).attr('name'));
+    renderPreview('/projects/'+ $(this).attr('id') +'/preview', $(this).attr('id'), $(this).attr('name'));
   });
 
   function renderPreview(url, project_id, project_name) {
     $('#hrefPost').find('#project_id').val(project_id);
     $('#hrefPost').find('#project_name').val(project_name);
-    $('#hrefPost').attr({action: url, method: 'get'}).submit();
+    $('#hrefPost').attr({action: url, method: 'post'}).submit();
   }
 </script>

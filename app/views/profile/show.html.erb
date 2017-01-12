@@ -28,7 +28,7 @@
 
       <% @projects.each_with_index do |project, index| %>
         <div class="content content-<%= index %>">
-          <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), show_project_path(project.name) %>
+          <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), show_project_path(project.id) %>
           <!-- <= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %> -->
             <div class="content-container">
               <div class="title"><%= project.name %></div>
@@ -42,7 +42,7 @@
                   <% end %>
                 <% end %>
               <% else %>
-                <%= link_to image_tag(asset_path('project/image_upload.svg'), class: 'default_img'), show_project_path(project.name) %>
+                <%= link_to image_tag(asset_path('project/image_upload.svg'), class: 'default_img'), show_project_path(project.id) %>
               <% end %>
 
             </div>

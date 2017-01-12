@@ -11,7 +11,7 @@ class ImageController < ApplicationController
     if @image.save
       render status: 200, json: @image
     else
-      render action: 'new'
+      render nothing: true, status: 304
     end
   end
 
@@ -19,7 +19,6 @@ class ImageController < ApplicationController
     # @image = @project.images.find(params[:image_id])
     # @image.xml_path = params[:xml_path]
     @image = @project.images.build(image_params)
-
     if @image.save
       render nothing: true, status: :ok, json: {"project": @project, "image": @image}
     else
@@ -49,21 +48,9 @@ class ImageController < ApplicationController
   end
 
   def set_project
-    @project = current_user.projects.find_by_name(params[:project_name])
-    unless @project.nil?
-      return @project
-    else
-      set_project_by_id(params[:project_id])
-    end
-  end
-
-  def set_project_by_id(id)
-    @project = current_user.projects.find(id)
-    unless @project.nil?
-      return @project
-    else
-      redirect_to root_path
-    end
+    id = params[:project_id]
+    return @project = Project.find(id) if id
+    return @project = current_user.projects.find_by_name(params[:project_name]) if params[:project_name]
   end
 
 end

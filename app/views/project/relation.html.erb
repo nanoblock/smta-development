@@ -75,7 +75,7 @@
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
     <input name="image_id" id="image_id" type="hidden" value="">
   </form>
-  <div class="preview-name"><%= link_to @project.name, show_project_path(@project.name) %></div>
+  <div class="preview-name"><%= link_to @project.name, show_project_path(@project.id) %></div>
   <div class="preview-line"></div>
 </div>
 
@@ -121,10 +121,10 @@
       gen_boxs = $('*[class^="gen_box_"]');
       saveClickableArea();
       
-      hrefPost("/project/<%= params[:project_name] %>/preview", id);
+      hrefPost("/projects/<%= params[:project_id] %>/preview", id);
       // location.href = "<= show_project_path(@project.name) %>";
     } else if(clazz == "preview-mode") {
-      hrefPost("/project/<%= params[:project_name] %>/preview", id);
+      hrefPost("/projects/<%= params[:project_id] %>/preview", id);
       // location.href = "/project/<= params[:project_name] %>/preview/"+id;
     }
   });
@@ -191,7 +191,6 @@
 
   main_content.on({
     dragstart: function(e) {
-      console.log("comecome");
       x = e.pageX,
       y = e.pageY;
       $(".hover").css("cursor", "move");
@@ -380,7 +379,7 @@
     function destroyClickableArea() {
       $.ajax({
         type: "POST",
-        url: "<%= destroy_all_project_image_clickables_path(params[:project_name], @image_id) %>",
+        url: "<%= destroy_all_project_image_clickables_path(params[:project_id], @image_id) %>",
         success: function(data) {
 
         },
@@ -395,7 +394,7 @@
       gen_boxs.each(function(index, value) {
         $.ajax({
           type: "POST",
-          url: "<%= project_image_clickables_path(params[:project_name], @image_id) %>",
+          url: "<%= project_image_clickables_path(params[:project_id], @image_id) %>",
           data: { clickable: { 
             target_image_id: $(this).attr('id'),
             top: (parseInt($(this).css('top'))),

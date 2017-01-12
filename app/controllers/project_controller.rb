@@ -1,7 +1,7 @@
 
 class ProjectController < ApplicationController
-  before_action :authenticate_user!, only: [:update, :show, :create]
-  before_action :find_by_project_name, only: [:show, :update, :relation, :preview]
+  before_action :authenticate_user!, only: [:update, :show, :create, :relation]
+  before_action :set_project, only: [:show, :update, :relation, :preview]
 
   def new
     @project = current_user.projects.new
@@ -16,7 +16,7 @@ class ProjectController < ApplicationController
     if @project.save
       render status: 200, json: @project, nothing: true
     else
-      render :new 
+      render nothing: true, status: 304
     end
   end
 
@@ -41,7 +41,7 @@ class ProjectController < ApplicationController
 
   def show
     @images = @project.images.all
-    gon.param = params[:project_name]
+    gon.param = params[:project_id]
   end
 
   def relation
@@ -56,7 +56,10 @@ class ProjectController < ApplicationController
   end
 
   def preview
-    @project_manager = gon.project_manager = project_manager? @project.id if params[:project_id].nil?
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    puts "project id -> #{@project.id}"
+    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
+    @project_manager = gon.project_manager = project_manager? @project.id unless @project.id.nil?
 
     @images = @project.images.all
 
@@ -81,23 +84,10 @@ class ProjectController < ApplicationController
     params.require(:project).permit(:name, :desc)
   end
 
-  def find_by_project_name
-    if !params[:project_id].nil?
-      return @project = Project.find(params[:project_id])
-    else
-      return @project = Project.find_by_name(params[:project_name])
-    end
-    # if current_user.projects.where(name: params[:project_name]).length <= 1
-      
-    # else
-    #   @project = current_user.projects.find(params[:project_id])
-    # end
-
-    # unless @project.nil?
-    #   return @project
-    # else
-    #   redirect_to root_path
-    # end
+  def set_project
+    id = params[:project_id]
+    return @project = current_user.projects.find(id) if id
+    return @project = current_user.projects.find_by_name(params[:project_name]) if params[:project_name]
   end
 
   def project_manager? project_id

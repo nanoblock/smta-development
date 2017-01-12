@@ -7,7 +7,7 @@
     <div class="project-upload">
       <%= form_tag create_image_path, method: 'post', id: 'upload-dropzone', remote: true, authenticity_token: true do %>
         
-        <input name="project_name" id="project_name" type="hidden" value="">
+        <!-- <input name="project_name" id="project_name" type="hidden" value=""> -->
         <input name="project_id" id="project_id" type="hidden" value="">
 
         <div id="upload">
@@ -35,8 +35,8 @@
 
   function hrefPost(url,method, image_param, project_name, project_id) {
     $('#hrefPost #image_id').attr('value', image_param);
-    $('#hrefPost #project_name').attr('value', project_name)
-    $('#hrefPost #project_id').attr('value', project_id)
+    $('#hrefPost #project_name').attr('value', project_name);
+    $('#hrefPost #project_id').attr('value', project_id);
     $('#hrefPost').attr({action: url, method: method}).submit();
   }
 
@@ -47,7 +47,7 @@
     if($('.project-name-form textarea').val() != "") {
       $.ajax({
         type: "POST",
-        url: 'project/validate/'+name,
+        url: 'projects/validate/'+name,
         success: function(data, status, xhr) {
           if(xhr.status == 200) {
 
@@ -70,7 +70,7 @@
                 if (myDropZone.getQueuedFiles().length > 0) {
                   myDropZone.processQueue();
                 } else {
-                  hrefPost("/project/"+$('.project-name-form textarea').val(), 'get', '', result.name, result.id);
+                  hrefPost("/projects/"+result.id, 'get', '', result.name, result.id);
                 }
               },
               error: function(data) {
@@ -104,7 +104,7 @@
   Dropzone.autoDiscover = false;
 
   var myDropZone = new Dropzone("#upload-dropzone", {
-    url: "<%= create_image_path %>",
+    // url: "<%= create_image_path %>",
     paramName: 'image[photo]',
     maxFiles: 100,
     addRemoveLinks: false,
@@ -139,7 +139,7 @@
 
       this.on('success', function(data, status, xhr) {
         result = $.parseJSON(data.xhr.responseText);
-        $(data.previewTemplate).attr('id', result.image.id);
+        $(data.previewTemplate).attr('id', result.id);
       });
       var clickedTemplate;
       this.on("addedfile", function(file) {
@@ -165,13 +165,14 @@
 
       this.on('queuecomplete', function(file) {      
         if (this.getQueuedFiles().length === 0) {
-          name = $('.project-name-form textarea').val();
+          // name = $('.project-name-form textarea').val();
+          name = $('.dropzone #project_name').attr('value');
           id = $('.dropzone #project_id').attr('value');
 
           if (saveMode == 'fileClick') {
-            hrefPost("/project/"+ name +"/relation", 'post', $(clickedTemplate).attr('id'), $('.dropzone #project_name').attr('value'), $('.dropzone #project_id').attr('value'));
+            hrefPost("/projects/"+ id +"/relation", 'post', $(clickedTemplate).attr('id'), $('.dropzone #project_name').attr('value'), id);
           } else {
-            hrefPost("/project/"+$('.project-name-form textarea').val(), 'get', '', name, id);
+            hrefPost("/projects/"+id, 'post', '', name, id);
           }
         }
       });
