@@ -25,6 +25,10 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
 
+  def login_by_token
+
+  end
+
   def login_validataion
     resource = User.find_for_database_authentication(email: params[:user][:email])
     return invalid_login_email unless resource

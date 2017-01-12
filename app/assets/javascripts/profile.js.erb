@@ -43,31 +43,25 @@
     param_app_email = $('.edit-email-form input').val();
     param_avatar = $('.edit-info #profile_avatar').attr('src');
 
-    if ( !isNullOrUndefined(param_app_name) && !isNullOrUndefined(param_desc) && !isNullOrUndefined(param_tel) && !isNullOrUndefined(param_app_email) && !isNullOrUndefined(param_avatar) ){
-
-    
-      $.ajax({
-        type: "PUT",
-        url: "<%= profile_path %>",
-        data: { profile: { 
-          app_name: param_app_name, 
-          desc: param_desc, 
-          tel: param_tel, 
-          app_email: param_app_email,
-          avatar: param_avatar}
-        },
-        success: function(data) {
-          if($('.edit-info').css('display') != 'none') {
-            showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc, param_avatar);
-          }
-        },
-        error: function(data) {
-
+    $.ajax({
+      type: "PUT",
+      url: "<%= profile_path %>",
+      data: { profile: { 
+        app_name: param_app_name, 
+        desc: param_desc, 
+        tel: param_tel, 
+        app_email: param_app_email,
+        avatar: param_avatar}
+      },
+      success: function(data) {
+        if($('.edit-info').css('display') != 'none') {
+          showInfo($(document).width(), param_app_name, param_tel, param_app_email, param_desc, param_avatar);
         }
-      });
-    } else {
-      showInfo($(document).width());
-    }
+      },
+      error: function(data) {
+
+      }
+    });
 
   });
 

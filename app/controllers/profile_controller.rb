@@ -5,6 +5,7 @@ class ProfileController < ApplicationController
 
   def create
     @profile = Profile.new(profile_avatar_params)
+
     current_user.profile = @profile
 
     if @profile.save
@@ -20,13 +21,7 @@ class ProfileController < ApplicationController
   end
 
   def update
-    @profile.app_name = params[:profile][:app_name]
-    @profile.desc = params[:profile][:desc]
-    @profile.tel = params[:profile][:tel]
-    @profile.app_email = params[:profile][:app_email] 
-    @profile.avatar = params[:profile][:avatar]
-
-    if @profile.save
+    if @profile.update_attributes(profile_avatar_params)
       current_user.profile = @profile
       render nothing: true, json: @profile, status: :ok
     else
@@ -43,6 +38,11 @@ class ProfileController < ApplicationController
       gon.desc        = "수정 버튼을 눌러 어플에 대한 정보를 입력하세요."
       gon.tel         = "전화번호"
       gon.app_email   = "이메일"
+    else
+      gon.app_name = @profile.app_name
+      gon.desc = @profile.desc
+      gon.tel = @profile.tel
+      gon.app_email = @profile.app_email
     end
     return @profile
   end

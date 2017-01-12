@@ -34,6 +34,7 @@ Rails.application.routes.draw do
     get 'project' => 'project#new', as: :new_project
     get 'project/:project_name' => 'project#show', as: :show_project
     post 'project/:project_name/relation' => 'project#relation', as: :image_relation_project
+    # get 'project/:project_name/relation' => 'project#relation'
     post 'project' => 'project#create', as: :create_project
     post 'project/:project_name/preview' => 'project#preview', as: :preview_project
     post 'project/validate/:project_name' => 'project#project_validate', as: :validate_project_name

@@ -1,3 +1,4 @@
+
 class ProjectController < ApplicationController
   before_action :authenticate_user!, only: [:update, :show, :create]
   before_action :find_by_project_name, only: [:show, :update, :relation, :preview]
@@ -56,11 +57,6 @@ class ProjectController < ApplicationController
 
   def preview
     @project_manager = gon.project_manager = project_manager? @project.id if params[:project_id].nil?
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-    puts "project_manager -> #{@projec_manager}"
-    puts "gon.project_manager -> #{gon.project_manager}"
-    puts project_manager? @project.id
-    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
 
     @images = @project.images.all
 

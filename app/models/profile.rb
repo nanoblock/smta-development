@@ -13,7 +13,7 @@ class Profile < ActiveRecord::Base
   url: "/images/:id_sha1/:style.:extension"
 
   validates_attachment :avatar, 
-    presence: true, 
+    # presence: true, 
     content_type: { content_type: ["image/jpg", "image/jpeg", "image/png"] },
     less_than: 3.megabytes
 
