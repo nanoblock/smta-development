@@ -180,3 +180,8 @@ function showModal(type) {
           $(".modal-regist .login-email").val('').focus(); 
         }
       });
+  $(document).
+      bind("ajax:success", function(data, xhr, status) {
+        console.info(xhr.token);
+        // location.href = "/home";
+      });

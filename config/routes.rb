@@ -58,6 +58,10 @@ Rails.application.routes.draw do
     post 'projects/:project_id/images/:image_id/clickables/destroy_all' => 'clickable#destroy_all', as: :destroy_all_project_image_clickables
   end
 
+  as :token do
+    post 'tokens/validation' => 'token#validation', as: :token_validation
+  end
+
   get 'landing' => 'page#landing', as: :page_landing
   # get 'home' => 'page#home', as: :page_home
   get 'privacy' => 'page#privacy', as: :page_privacy
