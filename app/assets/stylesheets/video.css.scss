@@ -1,0 +1,154 @@
+@import "bootstrap";
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .video {
+    .mobile-wrap {
+      width: 300px;
+      margin-top: 52px;
+    }
+    .video-view {
+      top: 119px;
+      width: 262px;
+      height: 465px;
+      margin-top: 89.6px;
+    }
+    .play-btn {
+      width: 50px;
+      height: 50px;
+      top: 683px;
+    }
+  }
+}
+@media screen and (min-width: 768px) and (max-width: 1023px) { 
+  .video {
+    .mobile-wrap {
+      width: 300px;
+      margin-top: 52px;
+    }
+    .video-view {
+      top: 141px;
+      width: 262px;
+      height: 465px;
+      margin-top: 89.6px;
+    }
+    .play-btn {
+      width: 50px;
+      height: 50px;
+      top: 705px;
+    }
+  }
+}
+@media screen and (min-width: 1024px) {
+  .video {
+    .mobile-wrap {
+      width: 300px;
+      margin-top: 52px;
+    }
+    .video-view {
+      top: 119px;
+      width: 262px;
+      height: 465px;
+      margin-top: 112px;
+    }
+    .play-btn {
+      width: 50px;
+      height: 50px;
+      top: 705px;
+    }
+  }
+}
+@media screen and (min-width: 1440px) {
+  .video {
+    .mobile-wrap {
+      width: 300px;
+      margin-top: 52px;
+    }
+    .video-view {
+      top: 119px;
+    width: 262px;
+    height: 465px;
+    margin-top: 112px;
+    }
+    .play-btn {
+      width: 50px;
+      height: 50px;
+      top: 715px;
+    }
+  }
+}
+
+.video {
+  padding-bottom: 40px;
+  .container {
+    width: 57%;
+    height: 700px;
+  }
+  .mobile-wrap {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    z-index: 1;
+  }
+
+  .play-btn {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    /*margin-top: -5px;*/
+    z-index: 2;
+  }
+
+  .video-view {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 2;
+    #video {
+      position: absolute;
+      z-index: 3;
+      object-fit: fill;
+      width: 100%;
+      height: 100%;
+    }
+    #canvas {
+      position: absolute;
+      width: 100%;
+      height: 100%; 
+      cursor: crosshair;
+      z-index: 4;
+    } 
+  }
+  #video-controls {
+    margin-top: 30px;
+    text-align: center;
+    .progress-wrap {
+      width: 30%;
+      height: 10px;
+      background: #F6F6F6;
+      margin: 20px 0;
+      overflow: hidden;
+      position: relative;
+      margin-left: auto;
+      margin-right: auto;
+      &:hover {
+        cursor: default;
+      }
+      .progress-bar {
+        background: #ffac48;
+        /*background:#407abd;*/
+        left: 0;
+        position: absolute;
+        top: 0;
+      }
+    }
+  }
+  
+}

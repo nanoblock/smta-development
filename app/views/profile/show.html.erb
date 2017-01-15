@@ -28,21 +28,33 @@
 
       <% @projects.each_with_index do |project, index| %>
         <div class="content content-<%= index %>">
-          <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), show_project_path(project.id) %>
+          <% if project.type(project.id) %>
+            <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), show_project_path(project.id) %>
+          <% end %>
+          <% unless project.type(project.id) %>
+            <%= link_to image_tag(asset_path('profile/edit.svg'), class: 'edit-icon'), '', class: 'video-link', id: project.id %>
+            <!-- video_section_project_path(project.id) -->
+          <% end %>
           <!-- <= image_tag asset_path('profile/edit.svg'), class: 'edit-icon' %> -->
             <div class="content-container">
               <div class="title"><%= project.name %></div>
               <div class="desc"><%= project.desc %></div>
 
-              <% unless project.images.empty? %>
-                <%= image_tag asset_path(project.images.first.photo(:thumb)) %>
-                <% if @browser != 'phone'%>
-                  <% unless project.images.second.nil? %>
-                    <%= image_tag asset_path(project.images.second.photo(:thumb)), style: 'margin-left:5px;', class: "delete-target-img" %>
+              <% if project.type(project.id) %>
+                <% unless project.images.empty? %>
+                  <%= image_tag asset_path(project.images.first.photo(:thumb)) %>
+                  <% if @browser != 'phone'%>
+                    <% unless project.images.second.nil? %>
+                      <%= image_tag asset_path(project.images.second.photo(:thumb)), style: 'margin-left:5px;', class: "delete-target-img" %>
+                    <% end %>
                   <% end %>
+                <% else %>
+                  <= link_to image_tag(asset_path('project/image_upload.svg'), class: 'default_img'), show_project_path(project.id) %>
                 <% end %>
-              <% else %>
-                <%= link_to image_tag(asset_path('project/image_upload.svg'), class: 'default_img'), show_project_path(project.id) %>
+              <% end %>
+
+              <% unless project.type(project.id) %>
+                <%= image_tag asset_path("profile/avatar_logo.svg"), style: 'margin-left:5px;', class: "video-thumnail" %>
               <% end %>
 
             </div>
@@ -67,6 +79,12 @@
       <% else %>
         <%= paginate @projects, window: 2 %>
     <% end %>
+  
+
+    <form id="hrefPost">
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+      <input name="project_id" id="project_id" type="hidden" value="">
+    </form>
 
   </div>
 </div>
@@ -76,4 +94,13 @@
   $('.user-profile .icon').attr('href', "tel: "+gon.tel);
   $('.user-profile .icon.mail').attr("href", "mailto:"+gon.app_email);
   $('.user-profile .sub-text').text(gon.desc);
+
+  function hrefPost(url, param) {
+    $('#hrefPost #project_id').attr('value', param);
+    $('#hrefPost').attr({action: url, method: 'post'}).submit();
+  }
+
+  $('.video-link').on('click', function(e) {
+    hrefPost("projects/"+$(this).attr('id')+"/videos/section", $(this).attr('id'));
+  });
 </script>

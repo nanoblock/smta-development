@@ -1,11 +1,3 @@
-<!-- <div class="video">
-  <div class="container">
-
-
-
-  </div>
-</div> -->
-
 <div class="video">
 <!-- left: 500px; top: 600px; -->
   <div class="container">
@@ -38,7 +30,7 @@
     <%= image_tag asset_path('project/play.svg'), class: 'play-btn', id: 'playpause' %>
     <div class="video-view">
       <figure id="videoContainer" data-fullscreen="false">
-        <video id="video" src="http://vjs.zencdn.net/v/oceans.mp4"></video>
+        <video id="video" src="<%= @video.url %>"></video>
       </figure>
 
       <div id="canvas"></div>
@@ -62,7 +54,7 @@
     <div id="section-add" style="float: left;margin-left: 10px;">구간 추가</div>
   </div> -->
     
-  <div class="preview-name">TEST VIDEO TITLE</div>
+  <div class="preview-name"><%= @project.name %></div>
   <div class="preview-line"></div>
   
 </div>
@@ -89,17 +81,25 @@
 
   var breakpoint = document.getElementById('breakpoint');
   var playpause = document.getElementById('playpause');
-  // var stop = document.getElementById('stop');
   var progress = document.getElementById('progress');
   var progressBar = document.getElementById('progress-bar');
   var preview = document.getElementById('preview');
-  // var sectionAdd = document.getElementById('section-add');
 
   var breakpointArray = [];
   var pauseTime;
   var currentSection = 0;
+  var mobileView = $('.mobile-view');
+
+  var main_content = $('#canvas');
+  var gen_box_count  = 1;
+
+  var main_content_left = parseInt(main_content.offset().left);
+  var main_content_top = parseInt(main_content.offset().top);
+  var main_content_right = parseInt(main_content_left) + parseInt(mobileView.width());
+  var main_content_bottom = parseInt(main_content_top) + parseInt(mobileView.height());
 
   if (document.addEventListener) {
+      
       video.addEventListener('loadedmetadata', function() {
         progress.setAttribute('max', video.duration);
       });
@@ -108,12 +108,6 @@
         if (video.paused || video.ended) video.play();
         else video.pause();
       });
-
-      // stop.addEventListener('click', function(e) {
-      //   video.pause();
-      //   video.currentTime = 0;
-      //   progress.value = 0;
-      // });
       
       var isSectionTime = false;
 
@@ -121,19 +115,7 @@
         if (!progress.getAttribute('max')) progress.setAttribute('max', video.duration);
         progress.value = video.currentTime;
         progressBar.style.width = ((video.currentTime / video.duration) * 100) + '%';
-        // if(breakpointArray.length != 0) {
-        //   if(currentSection == breakpointArray.length -1) {
-        //     currentSection = 0;
-        //   }
-        //   setVideoPlay(breakpointArray[currentSection], breakpointArray[currentSection+1]);
-        //   currentSection = currentSection + 1;
-        // }
-        // if(video.currentTime >= pauseTime) {
-        //     video.pause();
-        //   } else {
-        //     video.play();
-        //   }
-        // }
+        
         setClickBoxSyncVideo(video.currentTime);
       }); 
 
@@ -159,14 +141,11 @@
         // } 
       });
 
-      // sectionAdd.addEventListener('click', function(e) {
-      //   breakpointArray.push(video.currentTime);
-      //   drawSectionPoint(video.currentTime);
-      //   breakpointArray.sort();
-      // });
-
       function drawSectionPoint(time, elements) {
-        elements.attr('id', time);
+        if(isNullOrUndefined(elements.attr('id'))) {
+          elements.attr('id', time);
+        }
+        
         id = elements.attr('id');
 
         $('.progress').append("<div class=\"section " +elements.attr('class')[0]+ "\" id="+id+" style=\"z-index: 2;\n\
@@ -178,20 +157,21 @@
                   </div>");
       };
 
-      
-      // preview.addEventListener('click', function(e) {
-        
-      // });
+      $(".top-menu").children().on("click", function(e) {
+        var clazz = $(this).attr('class');
+        var id = <%= @video.id %>
+        if(clazz == "save-mode") {
+          saveClickableArea();
+          hrefPost("/projects/<%= params[:project_id] %>/preview", id);
+        } else if(clazz == "preview-mode") {
+          hrefPost("/projects/<%= params[:project_id] %>/preview", id);
+        }
+      });
     }
 
 
   function hrefPost(url, param) {
-    <% if @project.type @project.id %>
     $('#hrefPost #image_id').attr('value', param);
-    <% else %>
-    $('#hrefPost #video_id').attr('value', param);
-    <% end %>
-    
     $('#hrefPost').attr({action: url, method: 'post'}).submit();
   }
 
@@ -200,7 +180,7 @@
   function setBreakpoint(time, elements) {
     breakpointArray.push(video.currentTime);
     breakpointArray.sort();
-    drawSectionPoint(video.currentTime, elements);
+    drawSectionPoint(time, elements);
   };
 
   function setClickBoxSyncVideo(time) {
@@ -225,26 +205,45 @@
   
   function isNullOrUndefined(variable) { return variable === null || variable === undefined || variable == ''; }
 
-  function createVideoClick() {
-    $('*[class^="gen_box_"]').each(function(index, value) {
-        $.ajax({
-          type: "POST",
-          url: "<= project_video_clickables(params[:project_id], @video_id) %>",
-          data: { clickable: { 
-            target_image_id: $(this).attr('id'),
-            top: (parseInt($(this).css('top'))),
-            left: (parseInt($(this).css('left'))),
-            width: $(this).width(),
-            height: $(this).height() } },
-          success: function(data) {
-
-          },
-          error: function(data) {
-
-          }
-        });
-      });
+  function saveClickableArea() {
+    createClickableArea();
   }
+
+  function createClickableArea() {
+    length = $('*[class^="gen_box_"]').length;
+    $('*[class^="gen_box_"]').each(function(index, value) {
+      $.ajax({
+        type: "POST",
+        url: "<%= project_video_clickables_path(params[:project_id], @video_id) %>",
+        data: { clickable: { 
+          time: $(this).attr('id'),
+          top: (parseInt($(this).css('top'))),
+          left: (parseInt($(this).css('left'))),
+          width: $(this).width(),
+          height: $(this).height() } },
+        success: function(data) {
+        },  
+        error: function(data) {
+
+        }
+      });
+    });
+
+  }
+
+  function destroyClickableArea() {
+    $.ajax({
+      type: "POST",
+      // url: "/projects/"+ <= params[:project_id] %> +"/videos/"+<= @video_id %>+"/clickables/destroy_all",
+      url: "<%= destroy_all_project_video_clickables_path(params[:project_id], @video_id) %>",
+      success: function(data) {
+
+      },
+      error: function(data) {
+
+      }
+    });
+  } //destroyClickableArea
 
   var main_content = $('#canvas')
     gen_box = null;
@@ -263,6 +262,12 @@
   });
 
   main_content.selectable({
+
+    create: function(e) {
+      // < @video.video_clickables.each do |clickables| %>
+      //   drawGenBox(gen_box_count, "<= clickables.time %>", "<= clickables.width %>", "<= clickables.height %>", "<= clickables.left %>", "<= clickables.top %>");
+      // < end %>
+    },
     selected: function(e) {
 
     },
@@ -280,20 +285,9 @@
       x_end = e.pageX,
       y_end = e.pageY;
 
-      drawGenBox(gen_box_count);
+      drawGenBox(gen_box_count, video.currentTime);
 
   }});
-
-
-  var mobileView = $('.mobile-view');
-
-  var main_content = $('#canvas');
-  var gen_box_count  = 1;
-
-  var main_content_left = parseInt(main_content.offset().left);
-  var main_content_top = parseInt(main_content.offset().top);
-  var main_content_right = parseInt(main_content_left) + parseInt(mobileView.width());
-  var main_content_bottom = parseInt(main_content_top) + parseInt(mobileView.height());
 
   $(document).on("keydown", function(e) {
     if (e.which == 8) {
@@ -303,7 +297,7 @@
     }
   });
 
-  function drawGenBox(box_count, box_target_image_id, box_width, box_height, box_left, box_top) {
+  function drawGenBox(box_count, time, box_width, box_height, box_left, box_top) {
       var gen_box = null;
       if(isNullOrUndefined(box_width)) {
         if( x_end - x_begin >= 0 ) {
@@ -333,8 +327,11 @@
       main_content.append('<div class="gen_box_' + box_count + ' '+ "hover clickbox"+'"></div>');
 
       gen_box = $('.gen_box_' + box_count);
+      if(!isNullOrUndefined(time)) {
+        gen_box.attr('id', time);
+      }
 
-      setBreakpoint(video.currentTime, gen_box);
+      setBreakpoint(time, gen_box);
 
       gen_box.on('click', function(e) {
         $('.clicked').removeClass('clicked');

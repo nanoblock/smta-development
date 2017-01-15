@@ -390,6 +390,7 @@
     } //destroyClickableArea
 
     function saveClickableArea() {
+      console.info("save start");
       destroyClickableArea();
       gen_boxs.each(function(index, value) {
         $.ajax({

@@ -1,7 +1,7 @@
 
 class ProjectController < ApplicationController
   before_action :authenticate_user!, only: [:update, :show, :create, :relation]
-  before_action :set_project, only: [:show, :update, :relation, :preview]
+  before_action :set_project, only: [:show, :update, :relation, :preview, :section]
 
   def new
     @project = current_user.projects.new
@@ -41,6 +41,7 @@ class ProjectController < ApplicationController
 
   def show
     @images = @project.images.all
+    @videos = @project.video
     gon.param = params[:project_id]
   end
 
@@ -55,20 +56,39 @@ class ProjectController < ApplicationController
     render "project/relation"
   end
 
+  def section
+    @video = @project.video
+    @video_id = @video.id
+    @video.video_clickables.each(&:destroy)
+    # render "project/section"
+  end
+
   def preview
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    puts "project id -> #{@project.id}"
-    puts "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"
-    @project_manager = gon.project_manager = project_manager? @project.id unless @project.id.nil?
+    @project_manager = gon.project_manager = project_manager?(@project.id) if @project.id
 
-    @images = @project.images.all
-
-    unless (params[:image_id]).nil?
-      @image = Image.find(params[:image_id])
-    else
-      @image = @images.first
+    unless @project.type @project.id
+      @video = @project.video 
+      @clickables = @video.video_clickables.order("time ASC")
     end
-    render "project/preview"
+
+    if @project.type @project.id
+      @images = @project.images.all
+
+      unless (params[:image_id]).nil?
+        @image = Image.find(params[:image_id])
+      else
+        @image = @images.first
+      end
+    end
+
+  end
+
+  def preview_image
+    
+  end
+
+  def preview_video
+    
   end
 
   def project_validate

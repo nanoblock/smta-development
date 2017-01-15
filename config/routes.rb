@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     get 'projects/:project_id' => 'project#show', as: :show_project
     post 'projects/:project_id' => 'project#show'
     post 'projects/:project_id/relation' => 'project#relation', as: :image_relation_project
+    post 'projects/:project_id/videos/section' => 'project#section', as: :video_section_project
     # get 'project/:project_id/relation' => 'project#relation'
     post 'projects' => 'project#create', as: :create_project
     post 'projects/:project_id/preview' => 'project#preview', as: :preview_project
@@ -58,8 +59,17 @@ Rails.application.routes.draw do
     post 'projects/:project_id/images/:image_id/clickables/destroy_all' => 'clickable#destroy_all', as: :destroy_all_project_image_clickables
   end
 
+  as :video do
+    post 'api/videos/' => 'video#api_create', as: :api_create_project_video
+  end
+
+  as :video_clickables do
+    post 'projects/:project_id/videos/:video_id/clickables' => 'video_clickable#create', as: :project_video_clickables
+    post 'projects/:project_id/videos/:video_id/clickables/destroy_all' => 'video_clickable#destroy_all', as: :destroy_all_project_video_clickables
+  end
+
   as :token do
-    post 'tokens/validation' => 'token#validation', as: :token_validation
+    post 'tokens/validation' => 'application#validation', as: :token_validation
   end
 
   get 'landing' => 'page#landing', as: :page_landing

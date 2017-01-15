@@ -10,6 +10,7 @@ $menuImageLinkWidth: 120px;
 $menuImageLinkHeight: 180px;
 
 @media screen and (min-width: 320px) {  
+  .video .preview-name,
   .preview-view .preview-name,
   .relation .preview-name {
     margin-top:44px;
@@ -21,6 +22,7 @@ $menuImageLinkHeight: 180px;
     color: #407abd;
   }
 
+  .video .preview-line,
   .preview-view .preview-line,
   .relation .preview-line {
     width: 210px;
@@ -35,6 +37,7 @@ $menuImageLinkHeight: 180px;
     margin-top: 52px;
   }
 
+  .video .top-menu,
   .relation .top-menu,
   .preview-view .top-menu {
       .preview-mode img, .top-menu-dropdown-preview,
@@ -45,11 +48,18 @@ $menuImageLinkHeight: 180px;
   }
 
   .relation .mobile-view,
-  .preview-view .mobile-view {
+  .preview-view .mobile-view,
+  .preview-view .video-view  {
     top: 119px;
     width: 262px;
     height: 465px;
     margin-top: 89.6px;
+  }
+
+  .preview-view .play-btn {
+    width: 50px;
+    height: 50px;
+    top: 683px;
   }
 
   .relation .menu-image-link {
@@ -82,6 +92,7 @@ $menuImageLinkHeight: 180px;
   }
 }
 @media screen and (min-width: 768px) {
+  .video .top-menu,
   .relation .top-menu,
   .preview-view .top-menu {
       .preview-mode img, .top-menu-dropdown-preview,
@@ -91,14 +102,23 @@ $menuImageLinkHeight: 180px;
       }
   }
   .relation .mobile-view,
-  .preview-view .mobile-view {
+  .preview-view .mobile-view,
+  .preview-view .video-view  {
     top: 141px;
     width: 262px;
     height: 465px;
     margin-top: 89.6px;
   }
+
+  .preview-view .play-btn {
+    width: 50px;
+    height: 50px;
+    top: 705px;
+  }
+  
 } 
 @media screen and (min-width: 1024px) {
+  .video .preview-name,
   .preview-view .preview-name,
   .relation .preview-name {
     margin-top:44px;
@@ -110,6 +130,7 @@ $menuImageLinkHeight: 180px;
     color: #407abd;
   }
 
+  .video .preview-line,
   .preview-view .preview-line,
   .relation .preview-line {
     width: 210px;
@@ -126,6 +147,7 @@ $menuImageLinkHeight: 180px;
     margin-top: 52px;
   }
 
+  .video .top-menu,
   .relation .top-menu,
   .preview-view .top-menu {
       .preview-mode img, .top-menu-dropdown-preview,
@@ -136,7 +158,8 @@ $menuImageLinkHeight: 180px;
   }
 
   .relation .mobile-view,
-  .preview-view .mobile-view {
+  .preview-view .mobile-view,
+  .preview-view .video-view  {
     /*top: 154px;
     width: 287px;
     height: 510px;
@@ -146,6 +169,12 @@ $menuImageLinkHeight: 180px;
     height: 465px;
     margin-top: 112px;
     /*margin-top: 89.6px;*/
+  }
+
+  .preview-view .play-btn {
+    width: 50px;
+    height: 50px;
+    top: 705px;
   }
 
   .relation .menu-image-link {
@@ -178,6 +207,7 @@ $menuImageLinkHeight: 180px;
   }
 } /*(min-width: 1025px) and (max-width: 1280px)*/
 @media screen and (min-width: 1440px) { 
+  .video .preview-name,
   .preview-view .preview-name,
   .relation .preview-name {
     /*margin-top:44px;
@@ -190,6 +220,7 @@ $menuImageLinkHeight: 180px;
     color: #407abd;
   }
 
+  .video .preview-line,
   .preview-view .preview-line,
   .relation .preview-line {
     width: 210px;
@@ -207,6 +238,7 @@ $menuImageLinkHeight: 180px;
     height: auto;*/
   }
 
+  .video .top-menu,
   .relation .top-menu,
   .preview-view .top-menu {
       .preview-mode img, .top-menu-dropdown-preview,
@@ -217,7 +249,8 @@ $menuImageLinkHeight: 180px;
   }
 
   .relation .mobile-view,
-  .preview-view .mobile-view {
+  .preview-view .mobile-view,
+  .preview-view .video-view  {
     /*top: 157.5px;
     width: 288px;
     height: 511px;
@@ -227,6 +260,12 @@ $menuImageLinkHeight: 180px;
     height: 465px;
     margin-top: 112px;
     /*margin-top: 89.6px;*/
+  }
+
+  .preview-view .play-btn {
+    width: 50px;
+    height: 50px;
+    top: 715px;
   }
 
   .relation .menu-image-link {
@@ -261,6 +300,7 @@ $menuImageLinkHeight: 180px;
 } /*(min-width: 1441px) and (max-width: 1600px)*/
 
 @media screen and (min-width: 1601px) {
+    .video .preview-name,
     .preview-view .preview-name,
     .relation .preview-name {
     margin-top:44px;
@@ -272,6 +312,7 @@ $menuImageLinkHeight: 180px;
     color: #407abd;
   }
 
+  .video .preview-line,
   .preview-view .preview-line,
   .relation .preview-line {
     width: 210px;
@@ -289,6 +330,7 @@ $menuImageLinkHeight: 180px;
     margin-top: 52px;
   }
 
+  .video .top-menu,
   .relation .top-menu,
   .preview-view .top-menu {
       .preview-mode img, .top-menu-dropdown-preview,
@@ -299,7 +341,8 @@ $menuImageLinkHeight: 180px;
   }
 
   .relation .mobile-view,
-  .preview-view .mobile-view {
+  .preview-view .mobile-view,
+  .preview-view .video-view  {
     /*top: 157.5px;
     width: 288px;
     height: 511px;
@@ -309,6 +352,12 @@ $menuImageLinkHeight: 180px;
     height: 465px;
     margin-top: 112px;
     /*margin-top: 89.6px;*/
+  }
+
+  .preview-view .play-btn {
+    width: 50px;
+    height: 50px;
+    top: 715px;
   }
 
   .relation .menu-image-link {
@@ -356,6 +405,17 @@ $menuImageLinkHeight: 180px;
   /*height: 100vh;*/
 }
 
+.preview-view .play-btn {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  /*margin-top: -5px;*/
+  z-index: 2;
+}
+  
+.video .top-menu,
 .relation .top-menu,
 .preview-view .top-menu {
   display:table;
@@ -388,6 +448,7 @@ $menuImageLinkHeight: 180px;
   }
 }
 
+.video .top-menu:hover,
 .relation .top-menu:hover,
 .preview-view .top-menu:hover {
   cursor: pointer;
@@ -424,7 +485,31 @@ $menuImageLinkHeight: 180px;
   display: none;
 }
 
-.preview-view .mobile-view .clickable {
+.preview-view .video-view {
+    position: absolute;
+    left:0;
+    right:0;
+    margin-left:auto;
+    margin-right:auto;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    z-index: 2;
+
+    #video {
+      position: absolute;
+      z-index: 3;
+      object-fit: fill;
+      width: 100%;
+      height: 100%;
+      left: 0;
+      right: 0;
+      margin-left: auto;
+      margin-right: auto;
+    }  
+  }
+
+.preview-view .mobile-view .clickable,
+.preview-view .video-view .pause {
   position: absolute;
   z-index: 4;
   background: transparent;

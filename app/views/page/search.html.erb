@@ -24,7 +24,13 @@
                     <%= image_tag asset_path('header/download.svg'), class: 'download' %>
                   </div>
 
-                  <%= image_tag(asset_path(result.images.first.photo.url), class: 'project-img') %>
+                  <% if  result.type result.id %>
+                    <%= image_tag(asset_path(result.images.first.photo.url), class: 'project-img') %>
+                  <% end %>
+
+                  <% unless result.type result.id %>
+                    <%= image_tag(asset_path("profile/avatar_logo.svg"), class: 'project-img') %>
+                  <% end %>
 
                   <div class="project-desc"><%= result.desc %></div>
                   <div class="project-tag">

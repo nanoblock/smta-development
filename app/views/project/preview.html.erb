@@ -25,77 +25,192 @@
 
     <%= image_tag asset_path("project/i-phone-6-silver.png"), class: "mobile-wrap" %>
 
-    <% @images.each do |images|%>
-      <div class="mobile-view" style="background-image: url(<%= asset_path images.photo.url %>)" id="<%= images.id %>">
-        <% images.clickables.each do |clickables| %>
-          <a class="clickable" id="<%= clickables.target_image_id %>" name="<%= images.id %>" href="javascript:;" style="top: <%= clickables.top %>px; left: <%= clickables.left %>px; width: <%= clickables.width %>px; height: <%= clickables.height %>px;"></a>
+    <% unless @project.type @project.id%>
+
+      <!-- <= image_tag asset_path('project/play.svg'), class: 'play-btn', id: 'playpause' %> -->
+
+      <div class="video-view" id="<%= @video.id %>">
+        <figure id="videoContainer" data-fullscreen="false">
+          <video id="video" src="<%= @video.url %>"></video>
+        </figure>
+        <% @clickables.each do |clickables| %>
+          <div class="pause" id="<%= clickables.time %>" name="<%= @video.id %>"
+          style="top: <%= clickables.top %>px; left: <%= clickables.left %>px; width: <%= clickables.width %>px; height: <%= clickables.height %>px;"></div>
         <% end %>
+      </div>
+
       </div>
     <% end %>
 
-  </div>
-  <div class="preview-name">
-    <% if @project_manager %>
+    <% if @project.type @project.id %>
+      <% @images.each do |images|%>
+        <div class="mobile-view" style="background-image: url(<%= asset_path images.photo.url %>)" id="<%= images.id %>">
+          <% images.clickables.each do |clickables| %>
+            <a class="clickable" id="<%= clickables.target_image_id %>" name="<%= images.id %>" href="javascript:;" style="top: <%= clickables.top %>px; left: <%= clickables.left %>px; width: <%= clickables.width %>px; height: <%= clickables.height %>px;"></a>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <div class="preview-name">
+    <% if @project_manager && @project.type(@project.id) %>
       <%= link_to @project.name, show_project_path(@project.id) %>
     <% else %>
       <%= @project.name %>
-      <!-- <= link_to @project.name, project_search_path %> -->
     <% end %>
       
     </div>
+
+  </div>
+  
   <div class="preview-line"></div>
 
   <form id="hrefPost">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
-    <input name="image_id" id="image_id" type="hidden" value="">
+    <% if @project.type @project.id %>
+      <input name="image_id" id="image_id" type="hidden" value="">
+    <% else %>
+      <input name="video_id" id="video_id" type="hidden" value="">
+    <% end %>
   </form>
 
 </div>
 
 <script type="text/javascript">
   function hrefPost(url, param) {
-    $('#hrefPost #image_id').attr('value', param);
+    <% if @project.type @project.id %>
+      $('#hrefPost #image_id').attr('value', param);
+    <% else %>
+      $('#hrefPost #video_id').attr('value', param);
+    <% end %>
     $('#hrefPost').attr({action: url, method: 'post'}).submit();
   }
 
   $(".mobile-view").each(function(index, value) {
-    if($(value).attr('id') == <%= @image.id %>) {
-      $(value).css('display', 'block');
-      return false;
-    }  
+    <% if @project.type @project.id %>
+      if($(value).attr('id') == <%= @image.id %>) {
+        $(value).css('display', 'block');
+        return false;
+      } 
+    <% end %> 
+  });
+
+  var supportsVideo = !!document.createElement('video').canPlayType;
+  var video = document.getElementById('video');
+  var pauseTime;
+  var breakpointNum = 0;
+  // var playpause = document.getElementById('playpause');
+
+  // playpause.addEventListener('click', function(e) {
+  //   if (video.paused || video.ended) video.play();
+  //   else video.pause();
+  // });
+
+  // video.addEventListener('pause', function(e) {
+  //   $(playpause).attr('src', '<= asset_path 'project/play.svg' %>');
+  // });
+
+  // video.addEventListener('play', function(e) {
+  //   $(playpause).attr('src', '<= asset_path 'project/pause.svg' %>');
+  // });
+  if (document.addEventListener) {
+    setBreakpoint();
+  }
+
+  video.addEventListener('play', function(e) {
+
+  });
+
+  video.addEventListener('timeupdate', function(e) {
+    if(video.currentTime >= pauseTime) {
+      video.pause();
+      breakpointNum = breakpointNum + 1;
+      setBreakpoint();
+    }
   });
 
   $(".top-menu").children().on("click", function(e) {
     var clazz = $(this).attr('class');
 
     var id = null;
-    $('.mobile-view').each(function(index, value) {
-      if ($(value).css('display') == 'block') {
-        id = $(value).attr('id');
-      }
-    });
+    
+    <% if @project.type @project.id %>
+      $('.mobile-view').each(function(index, value) {
+        if ($(value).css('display') == 'block') {
+          id = $(value).attr('id');
+        }
+      });
+    <% else %>
+      id = $('video-view').attr('id');
+    <% end %>    
+    
     if(clazz == "link-mode" && gon.project_manager) {
-      hrefPost("/projects/<%= params[:project_id] %>/relation", id);
+
+      <% if @project.type @project.id %>
+        hrefPost("/projects/<%= params[:project_id] %>/relation", id);
+      <% end %>
+
+      <% unless @project.type @project.id %>
+        hrefPost("/projects/"+<%= params[:project_id] %>+"/videos/section", id);
+      <% end %>
+
+    } else if(clazz == "save-mode" && gon.project_manager ) {
+      <% if @project.type(@project.id) %>
+        location.href = "<%= show_project_path(@project.id) %>";
+      <% else %>
+        location.href = "<%= root_path %>"
+      <% end %>
       
-    } else if(clazz == "save-mode" && gon.project_manager) {
-      location.href = "<%= show_project_path(@project.id) %>";
     }
   });
 
-  $(".clickable").parent().on("click", function(e) {
-    $(".clickable").effect( "highlight", {color: "rgba(0, 0, 0, 0.7)"}, 500, null);
+  <% if @project.type @project.id %>
+    $(".clickable").parent().on("click", function(e) {
+      $(".clickable").effect( "highlight", {color: "rgba(0, 0, 0, 0.7)"}, 500, null);
+    });
+
+    $(".clickable").on('click', function(e) {
+      currentArea = $(this);
+      currentArea.parent().css('display', 'none');
+      $(".mobile-view").each(function(index, value) {
+        if( currentArea.attr('id') == $(value).attr('id') ) {
+          $(value).effect('fade', null, 200, function() {
+            $(value).css('display', 'block');
+          });
+        }
+      });
+      e.stopPropagation();
+    });
+  <% end %>
+
+  $('.pause').parent().on('click', function(e) {
+    $($('.pause')[breakpointNum]).effect('highlight', {color: "rgba(0,0,0,0.7)"}, 300, null);
   });
 
-  $(".clickable").on('click', function(e) {
-    currentArea = $(this);
-    currentArea.parent().css('display', 'none');
-    $(".mobile-view").each(function(index, value) {
-      if( currentArea.attr('id') == $(value).attr('id') ) {
-        $(value).effect('fade', null, 200, function() {
-          $(value).css('display', 'block');
+  function setBreakpoint() {
+    <% unless @project.type @project.id %>
+      if( $('.pause').length - 1 >= 0) {
+          video.currentTime = $($('.pause')[breakpointNum]).attr('id');
+          pauseTime = $($('.pause')[breakpointNum+1]).attr('id') -0.25;
+
+        $('.pause').css('display', 'none');
+        $($('.pause')[breakpointNum]).css('display', 'block');
+        $($('.pause')[breakpointNum]).on('click', function(e) {
+          if($('.pause').length - 1 == breakpointNum) {
+            breakpointNum = 0;
+            video.currentTime = $($('.pause')[breakpointNum]).attr('id');
+            pauseTime = $($('.pause')[breakpointNum+1]).attr('id')-0.25;
+          }
+          video.play();
         });
+
+        // $('.pause').each(function(index, value) {
+        //   $(this).on('click', function(e) {
+        //     video.play();
+        //   });
+        // });
       }
-    });
-    e.stopPropagation();
-  });
+    <% end %>
+  };
+
 </script>

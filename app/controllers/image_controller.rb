@@ -19,6 +19,7 @@ class ImageController < ApplicationController
     # @image = @project.images.find(params[:image_id])
     # @image.xml_path = params[:xml_path]
     @image = @project.images.build(image_params)
+  
     if @image.save
       render nothing: true, status: :ok, json: {"project": @project, "image": @image}
     else

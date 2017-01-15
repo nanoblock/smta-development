@@ -182,6 +182,5 @@ function showModal(type) {
       });
   $(document).
       bind("ajax:success", function(data, xhr, status) {
-        console.info(xhr.token);
-        // location.href = "/home";
+        location.href = "/home";
       });
