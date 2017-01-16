@@ -46,6 +46,7 @@
       .search-content {
         width: 90%;
         max-height: 507.2px;
+        /*min-height: 500px;*/
         border-radius: 5px;
         background-color: #ffffff;
         box-shadow: 0 4px 14px 7px rgba(121, 121, 121, 0.05);
@@ -85,9 +86,10 @@
               text-overflow: ellipsis;
             }
             .project-name {
-              font-size: 17px;
+              font-size: 15px;
               letter-spacing: 0.3px;
               color: #000000;
+              height: 40px;
               /*text-overflow: ellipsis; white-space: nowrap; overflow: hidden;*/
               overflow: hidden;
               text-overflow: ellipsis;
@@ -124,8 +126,9 @@
             width: 100%;
             margin-top: 12px;
             margin-left: -10px;
-            /*height: 308px;*/
-            object-fit: contain;
+            height: 308px;
+            /*object-fit: contain;*/
+            object-fit: fill;
           }
           .project-desc {
             padding-top: 12px;

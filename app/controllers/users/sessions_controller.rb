@@ -25,9 +25,13 @@ class Users::SessionsController < Devise::SessionsController
       sign_in(user, scope: :user) 
     end
     
-    # profile = Profile.new
-    # user.profile = profile
-    # profile.save
+    profile = Profile.new
+    profile.app_name = ''
+    profile.desc = ''
+    profile.tel = ''
+    profile.app_email = ''
+    user.profile = profile
+    profile.save
 
     yield resource if block_given?
     render status: :ok, json: {"user": user, "token": user.token(user.id)}

@@ -31,7 +31,7 @@
 
       <div class="video-view" id="<%= @video.id %>">
         <figure id="videoContainer" data-fullscreen="false">
-          <video id="video" src="<%= @video.url %>"></video>
+          <video muted id="video" src="<%= @video.url %>"></video>
         </figure>
         <% @clickables.each do |clickables| %>
           <div class="pause" id="<%= clickables.time %>" name="<%= @video.id %>"
@@ -51,18 +51,16 @@
         </div>
       <% end %>
     <% end %>
-    
-    <div class="preview-name">
-    <% if @project_manager && @project.type(@project.id) %>
+
+  </div>
+
+  <div class="preview-name">
+    <% if @project_manager || @project.type(@project.id) %>
       <%= link_to @project.name, show_project_path(@project.id) %>
     <% else %>
       <%= @project.name %>
     <% end %>
-      
-    </div>
-
   </div>
-  
   <div class="preview-line"></div>
 
   <form id="hrefPost">
@@ -117,17 +115,16 @@
     setBreakpoint();
   }
 
-  video.addEventListener('play', function(e) {
-
-  });
-
-  video.addEventListener('timeupdate', function(e) {
-    if(video.currentTime >= pauseTime) {
-      video.pause();
-      breakpointNum = breakpointNum + 1;
-      setBreakpoint();
-    }
-  });
+  <% unless @project.type @project.id %>
+    video.addEventListener('timeupdate', function(e) {
+      if(video.currentTime >= pauseTime) {
+        video.pause();
+        breakpointNum = breakpointNum + 1;
+        setBreakpoint();
+      }
+    });
+  <% end %>
+  
 
   $(".top-menu").children().on("click", function(e) {
     var clazz = $(this).attr('class');
@@ -145,7 +142,6 @@
     <% end %>    
     
     if(clazz == "link-mode" && gon.project_manager) {
-
       <% if @project.type @project.id %>
         hrefPost("/projects/<%= params[:project_id] %>/relation", id);
       <% end %>

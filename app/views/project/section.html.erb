@@ -30,7 +30,7 @@
     <%= image_tag asset_path('project/play.svg'), class: 'play-btn', id: 'playpause' %>
     <div class="video-view">
       <figure id="videoContainer" data-fullscreen="false">
-        <video id="video" src="<%= @video.url %>"></video>
+        <video muted id="video" src="<%= @video.url %>"></video>
       </figure>
 
       <div id="canvas"></div>

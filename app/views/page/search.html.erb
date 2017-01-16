@@ -29,7 +29,8 @@
                   <% end %>
 
                   <% unless result.type result.id %>
-                    <%= image_tag(asset_path("profile/avatar_logo.svg"), class: 'project-img') %>
+                    <video muted class="project-img" id="video" src="<%= result.video.url %>"></video>
+                    <!-- <= image_tag(asset_path("profile/avatar_logo.svg"), class: 'project-img') %> -->
                   <% end %>
 
                   <div class="project-desc"><%= result.desc %></div>
@@ -85,4 +86,7 @@
     $('#hrefPost').find('#project_name').val(project_name);
     $('#hrefPost').attr({action: url, method: 'post'}).submit();
   }
+
+  var video = document.getElementById('video');
+  video.play();
 </script>
