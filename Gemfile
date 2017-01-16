@@ -47,4 +47,6 @@ gem 'daemons'
 
 #progress
 gem 'nprogress-rails'
+
+gem 'unicorn'
 # bundle exec ./bin/delayed_job $1 start
