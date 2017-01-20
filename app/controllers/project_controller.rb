@@ -106,7 +106,7 @@ class ProjectController < ApplicationController
 
   def set_project
     id = params[:project_id]
-    return @project = current_user.projects.find(id) if id
+    return @project = Project.find(id) if id
     return @project = current_user.projects.find_by_name(params[:project_name]) if params[:project_name]
   end
 

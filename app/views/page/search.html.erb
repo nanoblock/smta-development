@@ -3,7 +3,7 @@
 
     <div class="search-container row">
 
-          <% @result[:project].each_with_index do |result, index| %>
+          <% @search_projects.each_with_index do |result, index| %>
             <div class="col-md-4 col-lg-3">
               <div class="search-content">
 
@@ -32,7 +32,7 @@
                     <video muted class="project-img" id="video" src="<%= result.video.url %>"></video>
                     <!-- <= image_tag(asset_path("profile/avatar_logo.svg"), class: 'project-img') %> -->
                   <% end %>
-
+                  
                   <div class="project-desc"><%= result.desc %></div>
                   <div class="project-tag">
                     <div class="search-tag">
@@ -60,13 +60,13 @@
     <% end %>
 
     <% case params[:page] 
-        when "1", nil, @last_page.to_s %>
-          <%= paginate @search_projects, window: 4 %>
-        <% when "2", (@last_page-1).to_s %>
-          <%= paginate @search_projects, window: 3 %>
-        <% else %>
-          <%= paginate @search_projects, window: 2 %>
-        <% end %>
+      when "1", nil, @last_page.to_s %>
+        <%= paginate @search_projects, window: 4 %>
+      <% when "2", (@last_page-1).to_s %>
+        <%= paginate @search_projects, window: 3 %>
+      <% else %>
+        <%= paginate @search_projects, window: 2 %>
+      <% end %>
   </div>
     <form id="hrefPost">
       <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
@@ -76,7 +76,12 @@
 </div>
 
 <script type="text/javascript">
-
+  if($('.pagination').length > 1) {
+    $('.pagination').each(function(index, value) {
+      $(this).remove();
+      return false;
+    })
+  };
   $('.search-header').on('click', function(e) {
     renderPreview('/projects/'+ $(this).attr('id') +'/preview', $(this).attr('id'), $(this).attr('name'));
   });

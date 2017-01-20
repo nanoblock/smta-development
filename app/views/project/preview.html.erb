@@ -51,10 +51,7 @@
         </div>
       <% end %>
     <% end %>
-
-  </div>
-
-  <div class="preview-name">
+    <div class="preview-name">
     <% if @project_manager || @project.type(@project.id) %>
       <%= link_to @project.name, show_project_path(@project.id) %>
     <% else %>
@@ -62,6 +59,9 @@
     <% end %>
   </div>
   <div class="preview-line"></div>
+  </div>
+
+  
 
   <form id="hrefPost">
     <%= hidden_field_tag :authenticity_token, form_authenticity_token %>

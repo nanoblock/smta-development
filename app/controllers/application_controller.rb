@@ -19,7 +19,11 @@ class ApplicationController < ActionController::Base
   def set_search
     @search = Project.ransack(params[:q])
 
-    @search_projects = @search.result.order('created_at DESC').page(params[:page]).per(6)
+    if @browser == "desktop"
+      @search_projects = @search.result.order('created_at DESC').page(params[:page]).per(6)
+    else
+      @search_projects = @search.result.order('created_at DESC').page(params[:page]).per(7)
+    end
     search_users = Array.new
     @result = Hash.new
     

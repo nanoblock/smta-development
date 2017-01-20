@@ -38,7 +38,8 @@
     <%= image_tag asset_path('project/play.svg'), class: 'play-btn', id: 'playpause' %>
     <div class="video-view">
       <figure id="videoContainer" data-fullscreen="false">
-        <video id="video" src="http://vjs.zencdn.net/v/oceans.mp4"></video>
+        <video id="video" src="https://s3.ap-northeast-2.amazonaws.com/morningcafe/test/vg.mp4"></video>
+        <!-- http://vjs.zencdn.net/v/oceans.mp4 -->
       </figure>
 
       <div id="canvas"></div>
@@ -185,15 +186,7 @@
     }
 
 
-  function hrefPost(url, param) {
-    <% if @project.type @project.id %>
-    $('#hrefPost #image_id').attr('value', param);
-    <% else %>
-    $('#hrefPost #video_id').attr('value', param);
-    <% end %>
-    
-    $('#hrefPost').attr({action: url, method: 'post'}).submit();
-  }
+  
 
   function setVideoPlay(startTime, endTime) {video.currentTime = startTime; pauseTime = endTime;};
 
