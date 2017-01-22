@@ -31,9 +31,9 @@ default: &default
 development:
   <<: *default
   database: <%= ENV['DB_NAME'] %>
-test:
-  <<: *default
-  database: test
+# test:
+#   <<: *default
+#   database: test
 
 production:
   <<: *default
